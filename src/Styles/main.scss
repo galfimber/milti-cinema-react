@@ -1,0 +1,16 @@
+/* Base */
+@import "./base/vars";
+@import "./base/reset";
+@import "./base/base";
+
+/* Components */
+@import "./components/header";
+@import "./components/main";
+@import "./components/filmList";
+@import "./components/my-films";
+@import "./components/film";
+@import "./components/filmPage";
+@import "./components/player";
+@import "./components/continueWatch";
+@import "./components/formSearch";
+@import "./components/profile";

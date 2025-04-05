@@ -1,0 +1,11 @@
+@use "../base/vars" as v;
+
+.my-films {
+  &__items {
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+    justify-content: center;
+  }
+}

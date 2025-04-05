@@ -1,0 +1,28 @@
+@use "../base/vars" as v;
+
+.film-list {
+  padding-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
+  justify-content: center;
+}
+.pagination {
+  padding-top: 50px;
+  padding-bottom: 70px;
+  &__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+  }
+  &__btn {
+    transition: 0.2s ease-out;
+    &:hover {
+      color: #7d5e9a;
+    }
+  }
+}
+.active {
+  color: #7d5e9a;
+}
