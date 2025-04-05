@@ -34,7 +34,7 @@ function App() {
       </main> */}
         <Routes>
           <Route
-            path="/"
+            path="/milti-cinema-react"
             element={
               <main className="main">
                 {/* <Auth
