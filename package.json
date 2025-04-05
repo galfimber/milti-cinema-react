@@ -33,6 +33,5 @@
     "globals": "^15.14.0",
     "sass": "1.79",
     "vite": "^6.0.5"
-  },
-  "homepage": "/milti-cinema-react"
+  }
 }

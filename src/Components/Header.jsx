@@ -12,7 +12,7 @@ export default function Header() {
   const { user } = useAppContext();
   return (
     <div className="header">
-      <Link to={`/milti-cinema-react`} className="link">
+      <Link to={`/`} className="link">
         <div className="logo">Multi Cinema</div>
       </Link>
       {/* <nav className="nav">

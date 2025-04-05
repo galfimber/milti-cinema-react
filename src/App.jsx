@@ -25,7 +25,7 @@ function App() {
   const pages = usePages();
 
   return (
-    <Router>
+    <Router basename="/milti-cinema-react/">
       <div className="App">
         <Header />
         {/* <main className="main">
@@ -34,7 +34,7 @@ function App() {
       </main> */}
         <Routes>
           <Route
-            path="/milti-cinema-react"
+            path="/"
             element={
               <main className="main">
                 {/* <Auth
