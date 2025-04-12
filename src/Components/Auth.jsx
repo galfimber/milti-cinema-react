@@ -7,9 +7,13 @@ function Auth() {
   return (
     <div className="auth">
       {user ? (
-        <button onClick={logOut}>Выйти</button>
+        <button className="profile__btn" onClick={logOut}>
+          Выйти
+        </button>
       ) : (
-        <button onClick={signInWithGoogle}>Войти через Google</button>
+        <button className="profile__btn" onClick={signInWithGoogle}>
+          Войти через Google
+        </button>
       )}
     </div>
   );

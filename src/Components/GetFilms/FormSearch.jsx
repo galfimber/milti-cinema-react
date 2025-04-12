@@ -30,12 +30,13 @@ export default function FormSearch({
         className="form__input"
           type="text"
           value={filmName}
+          placeholder="Поиск"
           onChange={(e) => {
             console.log(e.target.value);
             setFilmName(e.target.value);
           }}
         />
-        <button className="form__btn">Поиск</button>
+        <button className="form__btn">Искать</button>
       </form>
     </div>
   );

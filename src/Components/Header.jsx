@@ -27,7 +27,7 @@ export default function Header() {
         </button> */}
         <Link to={`/my-films`} className="link my-watch">
           <FontAwesomeIcon icon={faBookmark} />
-          Мои фильмы
+          <span>Мои фильмы</span>
         </Link>
         {/* <form action="#" className="search__form form">
           <input type="text" className="form__input" />

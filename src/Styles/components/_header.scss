@@ -32,6 +32,9 @@
   align-items: center;
   gap: 50px;
   // overflow: hidden;
+  @media(max-width: v.$laptop-size){
+    gap: 20px;
+  }
 
   .form {
     display: flex;
@@ -122,9 +125,14 @@ a.my-watch{
   align-items: center;
   gap: 10px;
   transition: .2s ease-out;
-  font-size: 26px;
+
   &:hover {
     color: v.$accent;
+  }
+  @media (max-width: v.$mobile-size) {
+    span{
+      display: none;
+    }
   }
 }
 

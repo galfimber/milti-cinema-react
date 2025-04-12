@@ -6,14 +6,17 @@ html {
 
 body {
   background-color: v.$page-bg;
-  color: v.$text-color;
+  color: v.$text-main;
   font-size: 24px;
   font-family: v.$font-main;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // @media(max-width: v.$laptop-size){
-  //   font-size: 20px;
-  // }
+  @media(max-width: v.$laptop-size){
+    font-size: 20px;
+  }
+}
+*::placeholder{
+  color: v.$test-secondary;
 }
 
 img {
@@ -31,7 +34,7 @@ img {
 //     font-weight: 700;
 //   }
   .title-2 {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 700;
   }
 
@@ -66,18 +69,16 @@ img {
 //       font-size: 25px;
 //     }
 //   }
-//   @media (max-width: 650px) {
-//     .title-1 {
-//       font-size: 40px;
-//       font-weight: 500;
-//     }
-//     .title-2 {
-//       font-size: 30px;
-//       font-weight: 400;
-//       text-align: center;
-//     }
-//     .title-3 {
-//       font-size: 25px;
-//       font-weight: 400;
-//     }
-//   }
+  @media (max-width: 650px) {
+    // .title-1 {
+    //   font-size: 40px;
+    //   font-weight: 500;
+    // }
+    .title-2 {
+      font-size: 32px;
+    }
+    // .title-3 {
+    //   font-size: 25px;
+    //   font-weight: 400;
+    // }
+  }

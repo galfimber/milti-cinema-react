@@ -60,3 +60,23 @@ export const searchById = async (filmId, setFilm, setIsLoading) => {
   setFilm(response);
   setIsLoading(false);
 };
+
+// export const getImg = (id) => {
+//   const request = new XMLHttpRequest();
+//   const api_key = "6395ebcee72e527ec489f9ad60d9e373";
+
+//   request.open(
+//     "GET",
+//     `http://webservice.fanart.tv/v3/movies/${id}?api_key=${api_key}`
+//   );
+
+//   request.onreadystatechange = function () {
+//     if (this.readyState === 4) {
+//       console.log("Status:", this.status);
+//       console.log("Headers:", this.getAllResponseHeaders());
+//       console.log("Body:", this.responseText);
+//     }
+//   };
+
+//   request.send();
+// };

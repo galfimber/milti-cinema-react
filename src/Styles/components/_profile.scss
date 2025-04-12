@@ -1,8 +1,15 @@
-.profile{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    &__avatar{
-        max-width: 100px;
+@use "../base/vars" as v;
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  &__avatar {
+    max-width: 100px;
+  }
+  &__btn {
+    padding-top: 10px;
+    &:hover {
+      color: v.$accent;
     }
+  }
 }

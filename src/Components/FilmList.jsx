@@ -24,6 +24,7 @@ export default function FilmList({
     //   all: 0,
     // });
     searchByName(filmName, setData, pages, setIsLoading, page);
+    window.scrollTo(0, 0);
   };
 
   const setPages = (actual) => {
@@ -58,7 +59,8 @@ export default function FilmList({
       <div className="film-list">
         {data.map(
           (filmData, index) =>
-            filmData.poster && filmData.poster.url && (
+            filmData.poster &&
+            filmData.poster.url && (
               <Film
                 key={index}
                 film={filmData}

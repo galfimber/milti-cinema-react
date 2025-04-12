@@ -40,7 +40,7 @@ function App() {
                 {/* <Auth
                 // user={user}
                 /> */}
-
+                <ContinueWatch />
                 <FormSearch
                   // filmName={filmName}
                   // setFilmName={setFilmName}
@@ -49,7 +49,6 @@ function App() {
                   // setPages={setPages}
                   // setIsLoading={setIsLoading}
                 />
-                <ContinueWatch />
               </main>
             }
           />

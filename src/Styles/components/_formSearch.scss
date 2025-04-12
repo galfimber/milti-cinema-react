@@ -1,10 +1,48 @@
+@use ".././base/vars" as v;
 .form {
-    display: flex;
-    gap: 15px;
-    align-items: center;
+  display: flex;
+  gap: 15px;
+  align-items: center;
   &__input {
-    width: 300px;
-    border-bottom: 1px solid white;
+    width: 500px;
     padding: 10px 20px;
+    border-radius: 10px;
+    background-color: $page-bg-accent;
+    -webkit-box-shadow: 0px 0px 0px 0px v.$accent;
+    -moz-box-shadow: 0px 0px 0px 0px v.$accent;
+    box-shadow: 0px 0px 0px 0px v.$accent;
+    transition: .2s ease-out;
+    &:focus{
+      -webkit-box-shadow: 0px 0px 8px 0px v.$accent;
+      -moz-box-shadow: 0px 0px 8px 0px v.$accent;
+      box-shadow: 0px 0px 8px 0px v.$accent;
+    }
+  }
+  &__btn{
+    transition: color .2s ease-out;
+    &:hover{
+      color: v.$accent;
+    }
+  }
+}
+@media (max-width: 1130px) {
+  .form {
+    &__input {
+      width: 400px;
+    }
+  }
+}
+@media (max-width: 650px) {
+  .form {
+    &__input {
+      width: 300px;
+    }
+  }
+}
+@media (max-width: 480px) {
+  .form {
+    &__input {
+      width: 100%;
+    }
   }
 }

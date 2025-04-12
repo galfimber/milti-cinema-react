@@ -24,6 +24,7 @@ export default function FilmPage() {
     if (data.length > 1) {
       setFilm(data.find((dataFilm) => dataFilm.id == id));
       setIsLoading(false);
+      // const images = getImg(film.externalId.imdb);
     } else {
       searchById(id, setFilm, setIsLoading);
     }
@@ -87,11 +88,13 @@ export default function FilmPage() {
 
           <div className="movie__container">
             <div className="movie__info">
-              {film.poster && film.poster.url && <img
+              {film.poster && film.poster.url && (
+                <img
                   className="movie__img"
                   src={film.poster.url}
                   alt={film.name}
-                />}
+                />
+              )}
               <div className="movie__info--wrapper">
                 {film.year && (
                   <div className="movie__year">Год выхода: {film.year} г.</div>
