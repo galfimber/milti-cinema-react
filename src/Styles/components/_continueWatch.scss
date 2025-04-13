@@ -19,3 +19,10 @@
     }
   }
 }
+@media (max-width: 650px) {
+  .continue-watch {
+    &__item {
+      margin: 0 auto;
+    }
+  }
+}

@@ -27,5 +27,5 @@ export default function KinoboxPlayer({ kpId }) {
     };
   }, [kpId]);
 
-  return <div ref={containerRef} className="kinobox_player"></div>;
+  return <div ref={containerRef} className="kinobox_player movie__player"></div>;
 }
