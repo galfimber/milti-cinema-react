@@ -15,6 +15,7 @@ import FilmPage from "./Components/FilmPage";
 import MyFilms from "./Components/MyFilms";
 import FormSearch from "./Components/GetFilms/FormSearch";
 import Profile from "./Components/Profile";
+import Collections from "./Components/Collections";
 
 function App() {
   // const { user } = useAuth();
@@ -49,6 +50,7 @@ function App() {
                   // setPages={setPages}
                   // setIsLoading={setIsLoading}
                 />
+                <Collections />
               </main>
             }
           />

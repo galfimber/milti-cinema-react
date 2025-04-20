@@ -14,21 +14,40 @@ export default function FilmPage() {
   //   });
   // };
   const { data, film, setFilm, isLoading, setIsLoading } = useAppContext();
-  // console.log(data);
+  console.log(film);
 
   const { id } = useParams();
 
   // const film = data.find((dataFilm) => dataFilm.id == id);
+  function searchh(arr, value) {
+    arr.map((item) => {
+      if (!(item instanceof Array)) {
+        if (item.id == value) {
+          setFilm(item);
+        }
+      } else {
+        searchh(item, value);
+      }
+    });
+  }
 
   useEffect(() => {
     if (data.length > 1) {
-      setFilm(data.find((dataFilm) => dataFilm.id == id));
-      setIsLoading(false);
+      // setFilm(data.find((dataFilm) => dataFilm.id == id));
+      // function search(arr, value) {
+      //   if (!(arr instanceof Array)) return value == arr;
+      //   return arr.some((item) => search(item, value));
+      // }
+      searchh(data, id);
+      // setIsLoading(false);
       // const images = getImg(film.externalId.imdb);
     } else {
       searchById(id, setFilm, setIsLoading);
     }
   }, []);
+  useEffect(() => {
+    setIsLoading(false);
+  }, [film]);
 
   return (
     <>
@@ -61,11 +80,7 @@ export default function FilmPage() {
                   src={film.backdrop.url}
                   alt={film.name}
                 />
-                <img
-                  className="movie__backdrop--logo"
-                  src={film.logo.url}
-                  alt={film.name}
-                />
+                <h3 className="movie__backdrop--name">{film.name}</h3>
               </div>
             </>
           ) : film.logo?.url ? (

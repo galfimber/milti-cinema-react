@@ -1,0 +1,10 @@
+.collections-new,
+.collections-serials {
+  padding-top: 50px;
+  &__wrapper {
+    display: flex;
+    gap: 20px;
+    padding-top: 20px;
+    overflow-x: auto;
+  }
+}

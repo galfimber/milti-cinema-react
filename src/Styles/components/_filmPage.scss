@@ -49,6 +49,8 @@
       font-size: 45px;
       font-weight: bold;
       z-index: 3;
+      max-width: 500px;
+      text-align: center;
     }
   }
   &__img {
@@ -88,6 +90,10 @@
         padding-top: 125px;
         max-width: 90%;
         width: 400px;
+      }
+      &--name {
+        padding-top: 100px;
+        width: 500px;
       }
     }
     &__player {

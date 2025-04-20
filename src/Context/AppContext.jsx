@@ -5,6 +5,7 @@ import { useLoading } from "../Hooks/useLoading";
 import { useData } from "../Hooks/useData";
 import { useFilmName } from "../Hooks/useFilmName";
 import { useFilm } from "../Hooks/useFilm";
+import { useCollections } from "../Hooks/useCollections";
 
 const AppContext = createContext();
 
@@ -15,6 +16,7 @@ export const AppProvider = ({ children }) => {
   const { data, setData } = useData([]);
   const { filmName, setFilmName } = useFilmName("");
   const { film, setFilm } = useFilm({});
+  const { collections, setCollections } = useCollections({});
 
   return (
     <AppContext.Provider
@@ -30,6 +32,8 @@ export const AppProvider = ({ children }) => {
         setFilmName,
         film,
         setFilm,
+        collections,
+        setCollections,
       }}
     >
       {children}

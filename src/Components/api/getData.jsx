@@ -61,6 +61,48 @@ export const searchById = async (filmId, setFilm, setIsLoading) => {
   setIsLoading(false);
 };
 
+export const searchCollections = async (setData, setIsLoading) => {
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "X-API-KEY": "84S4SNX-Y084WMK-K7FV73W-8G8P6MH",
+    },
+  };
+  const [response1, response2] = await Promise.all([
+    fetch(
+      "https://api.kinopoisk.dev/v1.4/movie?" +
+        new URLSearchParams({
+          page: "1",
+          limit: "25",
+          sortField: "votes.await",
+          sortType: "-1",
+          "votes.await": "1000-6666666",
+          year: new Date().getFullYear(),
+          status: "completed",
+        }),
+      options
+    ),
+    fetch(
+      "https://api.kinopoisk.dev/v1.4/movie?" +
+        new URLSearchParams({
+          page: "1",
+          limit: "25",
+          sortField: "votes.imdb",
+          sortType: "-1",
+          isSeries: "true",
+          year: `${new Date().getFullYear() - 5}-${new Date().getFullYear()}`,
+        }),
+      options
+    ),
+  ]);
+  const data1 = await response1.json();
+  const data2 = await response2.json();
+
+  setData([data1.docs, data2.docs]);
+  setIsLoading(false);
+};
+
 // export const getImg = (id) => {
 //   const request = new XMLHttpRequest();
 //   const api_key = "6395ebcee72e527ec489f9ad60d9e373";
