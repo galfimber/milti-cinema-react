@@ -1,8 +1,9 @@
+import { memo } from "react";
 import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
 import Lodaer from "../img/loader.gif";
 
-export default function Film({
+export default memo(function Film({
   film,
   // likedMovies,
   // toggleLike,
@@ -11,13 +12,13 @@ export default function Film({
 }) {
   const { likedMovies, toggleLike, isLoading, setIsLoading } = useAppContext();
 
-  const handleImg = () => {
-    setIsLoading(false);
-  };
+  // const handleImg = () => {
+  //   setIsLoading(false);
+  // };
 
   return (
     <div className="film" data-id={film.id}>
-      {film.poster?.url? (
+      {film.poster?.url ? (
         <Link to={`/movie/${film.id}`} className="film__link">
           <img
             className="film__img"
@@ -45,4 +46,4 @@ export default function Film({
       </button>
     </div>
   );
-}
+});

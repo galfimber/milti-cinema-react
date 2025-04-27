@@ -2,10 +2,12 @@ import { useAppContext } from "./../Context/AppContext";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router";
 import Player from "./Player";
-import { useState, useEffect } from "react";
+import { memo, useEffect } from "react";
 import { searchById } from "./api/getData";
+import { useLoading } from "../Hooks/useLoading";
+// import { useFilm } from "../Hooks/useFilm";
 
-export default function FilmPage() {
+export default memo(function FilmPage() {
   // const back = () => {
   //   setFilmIndex({
   //     ...filmIndex,
@@ -13,22 +15,34 @@ export default function FilmPage() {
   //     isActive: false,
   //   });
   // };
-  const { data, film, setFilm, isLoading, setIsLoading } = useAppContext();
-  console.log(film);
+  const { data, film, setFilm } = useAppContext();
+  const { isLoading, setIsLoading } = useLoading();
+  // const { film, setFilm } = useFilm();
 
   const { id } = useParams();
+  console.log(film);
 
   // const film = data.find((dataFilm) => dataFilm.id == id);
   function searchh(arr, value) {
+    let isHave = false;
     arr.map((item) => {
       if (!(item instanceof Array)) {
         if (item.id == value) {
+          isHave = true;
           setFilm(item);
+          setIsLoading(false);
         }
       } else {
         searchh(item, value);
       }
     });
+    // if (Object.keys(film).length === 0) {
+    //   console.log("1");
+    //   searchById(id, setFilm, setIsLoading);
+    // }
+    if (!isHave) {
+      searchById(id, setFilm, setIsLoading);
+    }
   }
 
   useEffect(() => {
@@ -45,9 +59,9 @@ export default function FilmPage() {
       searchById(id, setFilm, setIsLoading);
     }
   }, []);
-  useEffect(() => {
-    setIsLoading(false);
-  }, [film]);
+  // useEffect(() => {
+  //   setIsLoading(false);
+  // }, [film]);
 
   return (
     <>
@@ -124,7 +138,7 @@ export default function FilmPage() {
                     Продолжительность: {film.movieLength} мин.
                   </div>
                 )}
-                {film.rating.imdb && (
+                {film.rating.imdb !== 0 && (
                   <div className="movie__rating">
                     Рейтинг: {film.rating.imdb}
                   </div>
@@ -145,4 +159,4 @@ export default function FilmPage() {
       )}
     </>
   );
-}
+});

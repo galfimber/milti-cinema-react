@@ -2,7 +2,6 @@
 // import Login from "./auth/Login";
 // import AuthDetails from "./auth/AuthDetails";
 import { useAppContext } from "../Context/AppContext";
-import FilmList from "./FilmList";
 import Film from "./Film";
 import Auth from "./Auth";
 
@@ -12,43 +11,9 @@ export default function MyFilms() {
   // toggleLike,
   // isLoading,
   // setIsLoading
-  const { user, likedMovies, toggleLike, setData } = useAppContext();
-
-  // const search = (page) => {
-  //   setPages({
-  //     actual: page,
-  //     all: 0,
-  //   });
-  //   searchByName(filmName, setData, pages, setIsLoading, page);
-  // };
-
-  // const pagesArr = [1];
-  // const setPages = (actual) => {
-  //   if (actual < 4) {
-  //     for (let i = 2, n = 0; i < pages.all && n < 3; i++, n++) {
-  //       pagesArr.push(i);
-  //     }
-  //   } else {
-  //     if (actual - 1 < 2) {
-  //       pagesArr.push("...");
-  //     }
-  //     pagesArr.push("...");
-  //     for (let i = actual - 1, n = 0; i < pages.all && n < 3; i++, n++) {
-  //       pagesArr.push(i);
-  //     }
-  //   }
-  //   if (pages.all - actual > 2) {
-  //     pagesArr.push("...");
-  //   }
-
-  //   pagesArr.push(pages.all);
-  //   pagesArr.forEach((i) => console.log(i));
-  // };
-
-  // setPages(pages.actual);
+  const { user, likedMovies, toggleLike } = useAppContext();
 
   console.log(likedMovies);
-  setData(likedMovies);
 
   return (
     <section className="my-films">
