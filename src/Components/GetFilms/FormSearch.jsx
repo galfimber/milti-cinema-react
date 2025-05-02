@@ -1,40 +1,40 @@
 // require("dotenv").config();
-// import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useAppContext } from "../../Context/AppContext";
 import { searchByName } from "../api/getData";
 import { useNavigate } from "react-router-dom";
 
-export default function FormSearch({
-  // filmName,
-  // setFilmName,
-  // setData,
-  pages,
-  // setPages,
-  // setIsLoading
-}) {
-  const { setIsLoading, filmName, setFilmName, setData } = useAppContext();
+export default function FormSearch({}) {
+  const { filmName, setFilmName, setData, setPages, setIsLoading } =
+    useAppContext();
+  const [localFilmName, setLocalFilmName] = useState("");
   const navigate = useNavigate();
 
-  const search = (e) => {
-    e.preventDefault();
-    // console.log(e.target.value);
-    // console.log(filmName);
-    searchByName(filmName, setData, pages, setIsLoading);
-    navigate("/search-result");
-  };
+  const search = useCallback(
+    (e) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setFilmName(localFilmName);
+      searchByName(localFilmName, setData, setPages, setIsLoading);
+      navigate("/search-result");
+    },
+    [localFilmName, filmName, setData, setPages, navigate]
+  );
+
+  // const handleInputChange = useCallback((e) => {
+  //   console.log(e.target.value);
+  //   setFilmName(e.target.value);
+  // }, [setFilmName]);
 
   return (
     <div className="container">
       <form className="form" onSubmit={search}>
         <input
-        className="form__input"
+          className="form__input"
           type="text"
-          value={filmName}
+          value={localFilmName}
           placeholder="Поиск"
-          onChange={(e) => {
-            console.log(e.target.value);
-            setFilmName(e.target.value);
-          }}
+          onChange={(e) => setLocalFilmName(e.target.value)}
         />
         <button className="form__btn">Искать</button>
       </form>

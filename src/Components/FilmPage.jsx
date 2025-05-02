@@ -1,76 +1,71 @@
 import { useAppContext } from "./../Context/AppContext";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useParams } from "react-router";
 import Player from "./Player";
 import { memo, useEffect } from "react";
 import { searchById } from "./api/getData";
 import { useLoading } from "../Hooks/useLoading";
-// import { useFilm } from "../Hooks/useFilm";
 
 export default memo(function FilmPage() {
-  // const back = () => {
-  //   setFilmIndex({
-  //     ...filmIndex,
-  //     index: null,
-  //     isActive: false,
-  //   });
-  // };
-  const { data, film, setFilm } = useAppContext();
+  const location = useLocation();
+  const { film, setFilm } = useAppContext();
   const { isLoading, setIsLoading } = useLoading();
-  // const { film, setFilm } = useFilm();
 
   const { id } = useParams();
-  console.log(film);
+  // console.log(film);
 
-  // const film = data.find((dataFilm) => dataFilm.id == id);
-  function searchh(arr, value) {
-    let isHave = false;
-    arr.map((item) => {
-      if (!(item instanceof Array)) {
-        if (item.id == value) {
-          isHave = true;
-          setFilm(item);
-          setIsLoading(false);
-        }
-      } else {
-        searchh(item, value);
-      }
-    });
-    // if (Object.keys(film).length === 0) {
-    //   console.log("1");
-    //   searchById(id, setFilm, setIsLoading);
-    // }
-    if (!isHave) {
-      searchById(id, setFilm, setIsLoading);
-    }
-  }
+  // function searchh(arr, value) {
+  //   let isHave = false;
+  //   arr.map((item) => {
+  //     if (!(item instanceof Array)) {
+  //       if (item.id == value) {
+  //         isHave = true;
+  //         setFilm(item);
+  //         setIsLoading(false);
+  //       }
+  //     } else {
+  //       searchh(item, value);
+  //     }
+  //   });
+  //   // if (Object.keys(film).length === 0) {
+  //   //   console.log("1");
+  //   //   searchById(id, setFilm, setIsLoading);
+  //   // }
+  //   if (!isHave) {
+  //     searchById(id, setFilm, setIsLoading);
+  //   }
+  // }
 
-  useEffect(() => {
-    if (data.length > 1) {
-      // setFilm(data.find((dataFilm) => dataFilm.id == id));
-      // function search(arr, value) {
-      //   if (!(arr instanceof Array)) return value == arr;
-      //   return arr.some((item) => search(item, value));
-      // }
-      searchh(data, id);
-      // setIsLoading(false);
-      // const images = getImg(film.externalId.imdb);
-    } else {
-      searchById(id, setFilm, setIsLoading);
-    }
-  }, []);
   // useEffect(() => {
-  //   setIsLoading(false);
-  // }, [film]);
+  //   if (data.length > 1) {
+  //     // setFilm(data.find((dataFilm) => dataFilm.id == id));
+  //     // function search(arr, value) {
+  //     //   if (!(arr instanceof Array)) return value == arr;
+  //     //   return arr.some((item) => search(item, value));
+  //     // }
+  //     searchh(data, id);
+  //     // setIsLoading(false);
+  //     // const images = getImg(film.externalId.imdb);
+  //   } else {
+  //     searchById(id, setFilm, setIsLoading);
+  //   }
+  // }, []);
+  useEffect(() => {
+    if (location.state?.data) {
+      setFilm(location.state.data);
+      setIsLoading(false);
+      return;
+    }
+
+    searchById(id, setFilm, setIsLoading);
+  }, [location.state]);
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <>
       {!isLoading && (
         <div className="movie" data-id={film.id}>
-          {/* <Link to="/search-result" className="link back">
-            Назад
-          </Link> */}
-
           {film.backdrop && film.backdrop.url && film.logo && film.logo.url ? (
             <>
               <div className="movie__backdrop">

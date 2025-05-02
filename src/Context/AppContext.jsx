@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { useLikedMovies } from "../Hooks/useLikedMovies";
 import { useAuth } from "../Hooks/useAuth";
 import { useLoading } from "../Hooks/useLoading";
@@ -6,6 +6,7 @@ import { useData } from "../Hooks/useData";
 import { useFilmName } from "../Hooks/useFilmName";
 import { useFilm } from "../Hooks/useFilm";
 import { useCollections } from "../Hooks/useCollections";
+import { usePages } from "../Hooks/usePages";
 
 const AppContext = createContext();
 
@@ -17,6 +18,7 @@ export const AppProvider = ({ children }) => {
   const { filmName, setFilmName } = useFilmName("");
   const { film, setFilm } = useFilm({});
   const { collections, setCollections } = useCollections({});
+  const { pages, setPages } = usePages();
 
   return (
     <AppContext.Provider
@@ -34,6 +36,8 @@ export const AppProvider = ({ children }) => {
         setFilm,
         collections,
         setCollections,
+        pages,
+        setPages,
       }}
     >
       {children}

@@ -1,101 +1,93 @@
-// import AuthDetails from "./auth/AuthDetails";
-// import { useLikedMovies } from "./../Hooks/useLikedMovies";
+import { useMemo, useCallback } from "react";
 import { useAppContext } from "./../Context/AppContext";
 import { searchByName } from "./api/getData";
 import Film from "./Film";
 
-export default function FilmList({
-  // data,
-  // setData,
-  // filmName,
-  // likedMovies,
-  // toggleLike,
-  pages,
-  // isLoading,
-  // setIsLoading,
-}) {
-  // console.log(data);
-  const { setIsLoading, filmName, data, setData } = useAppContext();
-  const pagesArr = [1];
+export default function FilmList({}) {
+  const { filmName, data, setData, pages, setPages, isLoading, setIsLoading } =
+    useAppContext();
 
-  const search = (page) => {
-    // setPages({
-    //   actual: page,
-    //   all: 0,
-    // });
-    searchByName(filmName, setData, pages, setIsLoading, page);
+  const search = useCallback((page) => {
+    setIsLoading(true);
+    searchByName(filmName, setData, setPages, setIsLoading, page);
     window.scrollTo(0, 0);
-  };
+  });
 
-  const setPages = (actual) => {
+  const pagesArr = useMemo(() => {
+    const result = [1];
+    const actual = pages?.actual || 1;
+    const all = pages?.all || 1;
+
     if (actual < 4) {
-      for (let i = 2, n = 0; i < pages.all && n < 3; i++, n++) {
-        pagesArr.push(i);
+      for (let i = 2, n = 0; i < all && n < 3; i++, n++) {
+        result.push(i);
       }
     } else {
       if (actual - 1 < 2) {
-        pagesArr.push("...");
+        result.push("...");
       }
-      pagesArr.push("...");
-      for (let i = actual - 1, n = 0; i < pages.all && n < 3; i++, n++) {
-        pagesArr.push(i);
+      result.push("...");
+      for (let i = actual - 1, n = 0; i < all && n < 3; i++, n++) {
+        result.push(i);
       }
     }
-    if (pages.all - actual > 2) {
-      pagesArr.push("...");
+    if (all - actual > 2) {
+      result.push("...");
     }
 
-    if (pages.all !== 1) {
-      pagesArr.push(pages.all);
+    if (all !== 1) {
+      result.push(all);
     }
-    // pagesArr.forEach((i) => console.log(i));
-  };
 
-  // console.log(pages);
-  setPages(pages.actual);
+    return result;
+  }, [pages?.actual, pages?.all]);
+
+  const handlePageClick = useCallback(
+    (pageNum) => {
+      search(pageNum);
+    },
+    [search]
+  );
 
   return (
     <>
-      <div className="film-list">
-        {data.map(
-          (filmData, index) =>
-            filmData.poster &&
-            filmData.poster.url && (
-              <Film
-                key={index}
-                film={filmData}
-                // likedMovies={likedMovies}
-                // toggleLike={toggleLike}
-                // isLoading={isLoading}
-                // setIsLoading={setIsLoading}
-              />
-            )
-        )}
-      </div>
-      <div className="pagination">
-        <ul className="pagination__list">
-          {pagesArr.map((pageNum, index) =>
-            pageNum === "..." ? (
-              <li className="pagination__item" key={index * 2}>
-                ...
-              </li>
-            ) : pageNum !== pages.actual ? (
-              <li className="pagination__item" key={pageNum}>
-                <button
-                  className="pagination__btn"
-                  onClick={() => search(pageNum)}
-                >
-                  {pageNum}
-                </button>
-              </li>
-            ) : (
-              <li className="pagination__item" key={pageNum}>
-                <button className="pagination__btn active">{pageNum}</button>
-              </li>
-            )
-          )}
-        </ul>
-      </div>
+      {isLoading ? (
+        <div className="film-list">Загрузка фильмов...</div>
+      ) : (
+        <>
+          <div className="film-list">
+            {data.map((filmData) => (
+              <Film key={filmData.id} film={filmData} />
+            ))}
+          </div>
+          <div className="pagination">
+            <ul className="pagination__list">
+              {pagesArr.map((pageNum, index) =>
+                pageNum === "..." ? (
+                  <li className="pagination__item" key={`ellipsis-${index}`}>
+                    ...
+                  </li>
+                ) : pageNum !== pages.actual ? (
+                  <li className="pagination__item" key={`page-${pageNum}`}>
+                    <button
+                      className="pagination__btn"
+                      onClick={() => handlePageClick(pageNum)}
+                    >
+                      {pageNum}
+                    </button>
+                  </li>
+                ) : (
+                  <li className="pagination__item" key={`active-${pageNum}`}>
+                    <button className="pagination__btn active">
+                      {pageNum}
+                    </button>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        </>
+      )}
     </>
   );
 }

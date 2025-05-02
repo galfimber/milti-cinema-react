@@ -13,6 +13,9 @@ export default function ContinueWatch() {
             <div className="continue-watch__item">
               <Link
                 to={`/movie/${likedMovies[likedMovies.length - 1].id}`}
+                state={{
+                  data: likedMovies[likedMovies.length - 1],
+                }}
                 className="film__link"
               >
                 {likedMovies[likedMovies.length - 1].poster?.url ? (

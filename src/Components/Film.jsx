@@ -1,45 +1,53 @@
-import { memo } from "react";
+import { memo, useCallback, useState } from "react";
 import { useAppContext } from "../Context/AppContext";
+import { useLoading } from "../Hooks/useLoading";
 import { Link } from "react-router-dom";
-import Lodaer from "../img/loader.gif";
+import Loader from "../img/loader.gif";
 
-export default memo(function Film({
-  film,
-  // likedMovies,
-  // toggleLike,
-  // isLoading,
-  // setIsLoading,
-}) {
-  const { likedMovies, toggleLike, isLoading, setIsLoading } = useAppContext();
+export default memo(function Film({ film }) {
+  const { likedMovies, toggleLike } = useAppContext();
+  const [imageLoading, setImageLoading] = useState(true);
 
-  // const handleImg = () => {
-  //   setIsLoading(false);
-  // };
+  const handleToggleLike = useCallback(() => {
+    toggleLike(film);
+  }, [film, toggleLike]);
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoading(false);
+  }, []);
 
   return (
     <div className="film" data-id={film.id}>
-      {film.poster?.url ? (
-        <Link to={`/movie/${film.id}`} className="film__link">
+      <Link
+        to={`/movie/${film.id}`}
+        state={{
+          data: film,
+        }}
+        className="film__link"
+      >
+        {imageLoading && film.poster?.url && (
+          <div className="film__img--preloadder-wrapper">
+            <img
+              className="film__img--preloadder"
+              src={Loader}
+              alt="Loading..."
+            />
+          </div>
+        )}
+        {film.poster?.url ? (
           <img
             className="film__img"
             src={film.poster.url}
             alt={film.name}
-            // onLoad={handleImg}
+            style={{ display: imageLoading ? "none" : "block" }}
+            onLoad={handleImageLoad}
           />
-
-          {/* {isLoading && (
-            <div className="film__preloader">
-              <img src={Lodaer} alt="prelodaer" />
-            </div>
-          )} */}
-        </Link>
-      ) : (
-        <Link to={`/movie/${film.id}`} className="link">
+        ) : (
           <div className="film__img">Not found</div>
-        </Link>
-      )}
+        )}
+      </Link>
       <h3 className="film__name">{film.name}</h3>
-      <button onClick={() => toggleLike(film)} className="film__like">
+      <button onClick={handleToggleLike} className="film__like">
         {likedMovies.some((likedMovie) => likedMovie.id === film.id)
           ? "❤️"
           : "🤍"}
