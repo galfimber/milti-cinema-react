@@ -1,4 +1,3 @@
-// require("dotenv").config();
 import { useCallback, useState } from "react";
 import { useAppContext } from "../../Context/AppContext";
 import { searchByName } from "../api/getData";
@@ -18,13 +17,8 @@ export default function FormSearch({}) {
       searchByName(localFilmName, setData, setPages, setIsLoading);
       navigate("/search-result");
     },
-    [localFilmName, filmName, setData, setPages, navigate]
+    [localFilmName, setFilmName, setData, setPages, setIsLoading, navigate]
   );
-
-  // const handleInputChange = useCallback((e) => {
-  //   console.log(e.target.value);
-  //   setFilmName(e.target.value);
-  // }, [setFilmName]);
 
   return (
     <div className="container">
