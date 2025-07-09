@@ -42,17 +42,17 @@ export default function KinoboxPlayer({ kpId }) {
       },
     };
     const fetchResponse = await fetch(
-      "https://api.alloha.tv/?" +
+      "https://api1573848848.apicollaps.cc/franchise/details?" +
         new URLSearchParams({
-          token: "04941a9a3ca3ac16e2b4327347bbc1",
-          kp: kpId,
+          token: "eedefb541aeba871dcfc756e6b31c02e",
+          kinopoisk_id: kpId,
         }),
       options
     );
     let response = await fetchResponse.json();
     if (response) {
       console.log(fetchResponse, response);
-      setLink(response.data.iframe);
+      setLink(response.iframe_url);
     }
   };
 
