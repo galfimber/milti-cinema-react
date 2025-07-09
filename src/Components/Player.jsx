@@ -39,20 +39,20 @@ export default function KinoboxPlayer({ kpId }) {
       method: "GET",
       headers: {
         accept: "application/json",
-        // mode: 'no-cors'
       },
     };
     const fetchResponse = await fetch(
-      "https://proxy.corsfix.com/?https://p.ddbb.lol/api/players?" +
+      "https://api.alloha.tv/?" +
         new URLSearchParams({
-          kinopoisk: kpId,
+          token: "04941a9a3ca3ac16e2b4327347bbc1",
+          kp: kpId,
         }),
       options
     );
     let response = await fetchResponse.json();
     if (response) {
-      console.log(fetchResponse, response)
-      setLink(response[1].iframeUrl);
+      console.log(fetchResponse, response);
+      setLink(response.data.iframe);
     }
   };
 
