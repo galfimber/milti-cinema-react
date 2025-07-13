@@ -1,4 +1,4 @@
-import { useAppContext } from "./../Context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   const { user } = useAppContext();
   return (
-    <div className="header">
+    <header className="header">
       <Link to={`/`} className="link">
         <div className="logo">Multi Cinema</div>
       </Link>
@@ -39,6 +39,6 @@ export default function Header() {
           </Link>
         )}
       </div>
-    </div>
+    </header>
   );
 }

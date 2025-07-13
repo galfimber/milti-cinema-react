@@ -1,6 +1,5 @@
-import { useAppContext } from "../Context/AppContext";
-import React from "react";
-import { signInWithGoogle, logOut } from "../firebase";
+import { useAppContext } from "../../context/AppContext";
+import { signInWithGoogle, logOut } from "../../firebase";
 
 function Auth() {
   const { user } = useAppContext();

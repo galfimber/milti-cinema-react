@@ -1,10 +1,10 @@
 import { useCallback, useState } from "react";
-import { useAppContext } from "../../Context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import { searchByName } from "../api/getData";
 import { useNavigate } from "react-router-dom";
 
-export default function FormSearch({}) {
-  const { filmName, setFilmName, setData, setPages, setIsLoading } =
+export default function SearchForm({}) {
+  const { setFilmName, setData, setPages, setIsLoading } =
     useAppContext();
   const [localFilmName, setLocalFilmName] = useState("");
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ export default function FormSearch({}) {
   );
 
   return (
+    <section className="search-form">
     <div className="container">
       <form className="form" onSubmit={search}>
         <input
@@ -33,5 +34,6 @@ export default function FormSearch({}) {
         <button className="form__btn">Искать</button>
       </form>
     </div>
+    </section>
   );
 }

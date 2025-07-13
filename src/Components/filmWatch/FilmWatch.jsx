@@ -1,8 +1,9 @@
-import { useAppContext } from "./../Context/AppContext";
+import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 
-export default function ContinueWatch() {
+export default function FilmWatch() {
   const { likedMovies } = useAppContext();
+  const likedMovie = likedMovies[likedMovies.length - 1];
 
   return (
     <>
@@ -12,16 +13,16 @@ export default function ContinueWatch() {
             <h2 className="title-2">Продолжить просмотр</h2>
             <div className="continue-watch__item">
               <Link
-                to={`/movie/${likedMovies[likedMovies.length - 1].id}`}
+                to={`/movie/${likedMovie.id}`}
                 state={{
-                  data: likedMovies[likedMovies.length - 1],
+                  data: likedMovie,
                 }}
                 className="film__link"
               >
-                {likedMovies[likedMovies.length - 1].poster?.url ? (
+                {likedMovie.poster?.url ? (
                   <img
-                    src={likedMovies[likedMovies.length - 1].poster.url}
-                    alt={likedMovies[likedMovies.length - 1].name}
+                    src={likedMovie.poster.url}
+                    alt={likedMovie.name}
                     className="continue-watch__poster"
                   />
                 ) : (
@@ -29,7 +30,7 @@ export default function ContinueWatch() {
                 )}
               </Link>
               <h3 className="continue-watch__name film__name">
-                {likedMovies[likedMovies.length - 1].name}
+                {likedMovie.name}
               </h3>
             </div>
           </div>

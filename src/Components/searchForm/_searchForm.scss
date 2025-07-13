@@ -1,4 +1,4 @@
-@use ".././base/vars" as v;
+@use "../../styles/base/vars" as v;
 .form {
   display: flex;
   gap: 15px;
@@ -7,7 +7,7 @@
     width: 500px;
     padding: 10px 20px;
     border-radius: 10px;
-    background-color: $page-bg-accent;
+    background-color: v.$page-bg-accent;
     -webkit-box-shadow: 0px 0px 0px 0px v.$accent;
     -moz-box-shadow: 0px 0px 0px 0px v.$accent;
     box-shadow: 0px 0px 0px 0px v.$accent;

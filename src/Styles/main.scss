@@ -1,17 +1,19 @@
 /* Base */
-@import "./base/vars";
-@import "./base/reset";
-@import "./base/base";
+@use "./base/vars";
+@use "./base/reset";
+@use "./base/base";
 
 /* Components */
-@import "./components/header";
-@import "./components/main";
-@import "./components/filmList";
-@import "./components/my-films";
-@import "./components/film";
-@import "./components/filmPage";
-@import "./components/player";
-@import "./components/continueWatch";
-@import "./components/formSearch";
-@import "./components/profile";
-@import "./components/collectionsNew";
+@use ".././components/header/header";
+@use ".././components/filmList/filmList";
+@use ".././components/myFilms/myFilms";
+@use ".././components/film/film";
+@use ".././components/filmPage/filmPage";
+@use ".././components/player/player";
+@use ".././components/filmWatch/filmWatch";
+@use ".././components/searchForm/searchForm";
+@use ".././components/profile/profile";
+@use ".././components/filmCollections/filmCollections";
+@use ".././components/pagination/pagination"
+
+

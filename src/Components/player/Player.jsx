@@ -1,36 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import { useAppContext } from "./../Context/AppContext";
+import { useEffect } from "react";
+import { useAppContext } from "../../context/AppContext";
 
 export default function KinoboxPlayer({ kpId }) {
-  const containerRef = useRef(null);
   const { link, setLink } = useAppContext();
 
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://p.ddbb.lol/kinobox.min.js";
-  //   script.async = true;
-  //   document.body.appendChild(script);
-
-  //   script.onload = () => {
-  //     if (containerRef.current) {
-  //       window.kbox(containerRef.current, {
-  //         search: {
-  //           kinopoisk: kpId,
-  //           sources: "turbo,collaps,alloha,kodik,vibix",
-  //         },
-  //         menu: {
-  //           enabled: false,
-  //         },
-  //       });
-  //     }
-  //   };
-
-  //   return () => {
-  //     try {
-  //       document.body.removeChild(script);
-  //     } catch (e) {}
-  //   };
-  // }, [kpId]);
   useEffect(() => {
     getPlayer();
   }, []);
@@ -41,6 +14,7 @@ export default function KinoboxPlayer({ kpId }) {
         accept: "application/json",
       },
     };
+    
     const fetchResponse = await fetch(
       "https://api1573848848.apicollaps.cc/franchise/details?" +
         new URLSearchParams({

@@ -1,8 +1,7 @@
 import { memo, useCallback, useState } from "react";
-import { useAppContext } from "../Context/AppContext";
-import { useLoading } from "../Hooks/useLoading";
+import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
-import Loader from "../img/loader.gif";
+import Loader from "../../img/Loader.gif";
 
 export default memo(function Film({ film }) {
   const { likedMovies, toggleLike } = useAppContext();

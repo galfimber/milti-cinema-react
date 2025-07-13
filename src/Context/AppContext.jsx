@@ -1,13 +1,13 @@
 import { createContext, useContext } from "react";
-import { useLikedMovies } from "../Hooks/useLikedMovies";
-import { useAuth } from "../Hooks/useAuth";
-import { useLoading } from "../Hooks/useLoading";
-import { useData } from "../Hooks/useData";
-import { useFilmName } from "../Hooks/useFilmName";
-import { useFilm } from "../Hooks/useFilm";
-import { useCollections } from "../Hooks/useCollections";
-import { usePages } from "../Hooks/usePages";
-import { useLink } from "../Hooks/useLink";
+import { useLikedMovies } from "../hooks/useLikedMovies";
+import { useAuth } from "../hooks/useAuth";
+import { useLoading } from "../hooks/useLoading";
+import { useData } from "../hooks/useData";
+import { useFilmName } from "../hooks/useFilmName";
+import { useFilm } from "../hooks/useFilm";
+import { useCollections } from "../hooks/useCollections";
+import { usePages } from "../hooks/usePages";
+import { useLink } from "../hooks/useLink";
 
 const AppContext = createContext();
 
