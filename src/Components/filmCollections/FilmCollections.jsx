@@ -19,9 +19,9 @@ export default memo(function FilmCollections() {
       <div className="container">
         {!isLoading && (
           <>
-            <div className="collections-serials">
+            <div className="collections collections-serials">
               <h2 className="title-2">Популярные сериалы</h2>
-              <div className="collections-serials__wrapper">
+              <div className="collections__wrapper">
                 {collections[1].map(
                   (filmData) =>
                     filmData.poster &&
@@ -31,9 +31,9 @@ export default memo(function FilmCollections() {
                 )}
               </div>
             </div>
-            <div className="collections-new">
+            <div className="collections collections-new">
               <h2 className="title-2">Ожидаемые</h2>
-              <div className="collections-new__wrapper">
+              <div className="collections__wrapper">
                 {collections[0].map(
                   (filmData) =>
                     filmData.poster &&

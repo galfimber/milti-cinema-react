@@ -75,6 +75,12 @@
   &__description {
     max-width: 1300px;
   }
+  &__sequels, &__similar{
+    padding-top: 100px;
+    &--title{
+      font-size: 36px;
+    }
+  }
 }
 @media (max-width: 1580px) {
   .movie {

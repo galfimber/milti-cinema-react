@@ -5,6 +5,7 @@ import Player from "../player/Player";
 import { memo, useEffect } from "react";
 import { searchById } from "../api/getData";
 import { useLoading } from "../../hooks/useLoading";
+import Film from "../film/Film";
 
 export default memo(function FilmPage() {
   const location = useLocation();
@@ -14,11 +15,11 @@ export default memo(function FilmPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    if (location.state?.data) {
-      setFilm(location.state.data);
-      setIsLoading(false);
-      return;
-    }
+    // if (location.state?.data) {
+    //   setFilm(location.state.data);
+    //   setIsLoading(false);
+    //   return;
+    // }
 
     searchById(id, setFilm, setIsLoading);
   }, [location.state]);
@@ -109,6 +110,22 @@ export default memo(function FilmPage() {
             </div>
           </div>
           <Player kpId={film.id} />
+          <div className="movie__sequels">
+            <h3 className="movie__sequels--title">Сиквелы/Приквелы</h3>
+            <div className="movie__list collections__wrapper">
+              {film.sequelsAndPrequels.map((sequel) => (
+                <Film key={sequel.id} film={sequel} />
+              ))}
+            </div>
+          </div>
+          <div className="movie__similar">
+            <h3 className="movie__similar--title">Похожие фильмы</h3>
+            <div className="movie__list collections__wrapper">
+              {film.similarMovies.map((similarMovie) => (
+                <Film key={similarMovie.id} film={similarMovie} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </>
