@@ -29,7 +29,7 @@ export default memo(function FilmPage() {
   return (
     <>
       <section className="movie" data-id={film.id}>
-        {film.backdrop && film.backdrop.url && film.logo && film.logo.url ? (
+        {film.backdrop && film.backdrop.url && film.logo && film.logo.previewUrl ? (
           <>
             <div className="movie__backdrop">
               <img
@@ -39,7 +39,7 @@ export default memo(function FilmPage() {
               />
               <img
                 className="movie__backdrop--logo"
-                src={film.logo.url}
+                src={film.logo.previewUrl}
                 alt={film.name}
               />
             </div>
@@ -55,12 +55,12 @@ export default memo(function FilmPage() {
               <h3 className="movie__backdrop--name">{film.name}</h3>
             </div>
           </>
-        ) : film.logo?.url ? (
+        ) : film.logo?.previewUrl ? (
           <>
             <div className="movie__backdrop">
               <img
                 className="movie__backdrop--logo"
-                src={film.logo.url}
+                src={film.logo.previewUrl}
                 alt={film.name}
               />
             </div>
@@ -75,10 +75,10 @@ export default memo(function FilmPage() {
 
         <div className="movie__container">
           <div className="movie__info">
-            {film.poster && film.poster.url && (
+            {film.poster && film.poster.previewUrl && (
               <img
                 className="movie__img"
-                src={film.poster.url}
+                src={film.poster.previewUrl}
                 alt={film.name}
               />
             )}
@@ -110,14 +110,17 @@ export default memo(function FilmPage() {
             </div>
           </div>
           <Player kpId={film.id} />
-          <div className="movie__sequels">
-            <h3 className="movie__sequels--title">Сиквелы/Приквелы</h3>
-            <div className="movie__list collections__wrapper">
-              {film.sequelsAndPrequels.map((sequel) => (
-                <Film key={sequel.id} film={sequel} />
-              ))}
+          {film.sequelsAndPrequels && (
+            <div className="movie__sequels">
+              <h3 className="movie__sequels--title">Сиквелы/Приквелы</h3>
+              <div className="movie__list collections__wrapper">
+                {film.sequelsAndPrequels.map((sequel) => (
+                  <Film key={sequel.id} film={sequel} />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+          {film.similarMovies && (
           <div className="movie__similar">
             <h3 className="movie__similar--title">Похожие фильмы</h3>
             <div className="movie__list collections__wrapper">
@@ -125,7 +128,7 @@ export default memo(function FilmPage() {
                 <Film key={similarMovie.id} film={similarMovie} />
               ))}
             </div>
-          </div>
+          </div>)}
         </div>
       </section>
     </>

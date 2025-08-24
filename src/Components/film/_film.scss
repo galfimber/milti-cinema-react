@@ -67,3 +67,11 @@
     }
   }
 }
+@media (max-width: 1440px) {
+  .film {
+    width: 250px;
+    &__img{
+      height: 375px;
+    }
+  }
+}
