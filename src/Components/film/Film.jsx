@@ -24,19 +24,19 @@ export default memo(function Film({ film }) {
         }}
         className="film__link"
       >
-        {imageLoading && film.poster?.url && (
-          <div className="film__img--preloadder-wrapper">
+        {imageLoading && film.poster?.previewUrl && (
+          <div className="film__img--preloader-wrapper">
             <img
-              className="film__img--preloadder"
+              className="film__img--preloader"
               src={Loader}
               alt="Loading..."
             />
           </div>
         )}
-        {film.poster?.url ? (
+        {film.poster?.previewUrl ? (
           <img
             className="film__img"
-            src={film.poster.url}
+            src={film.poster.previewUrl}
             alt={film.name}
             style={{ display: imageLoading ? "none" : "block" }}
             onLoad={handleImageLoad}

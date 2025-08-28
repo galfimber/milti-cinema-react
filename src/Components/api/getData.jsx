@@ -56,7 +56,7 @@ export const searchByName = async (filmName, setData, setPages,setIsLoading, pag
       };
 
       const fetchResponse = await fetch(
-        "https://api.kinopoisk.dev/v1.4/movie?" +
+        "https://api.kinopoisk.dev/v1.3/movie?" +
           new URLSearchParams({
             page: page.toString(),
             limit: "25",

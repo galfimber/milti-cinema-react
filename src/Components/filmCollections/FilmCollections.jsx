@@ -8,6 +8,9 @@ export default memo(function FilmCollections() {
   const { collections, setCollections } = useAppContext();
   const { isLoading, setIsLoading } = useLoading();
 
+  const params = {
+    spaceBetween: 20,
+  };
   useEffect(() => {
     if (collections.length > 0) return setIsLoading(false);
 
@@ -22,13 +25,13 @@ export default memo(function FilmCollections() {
             <div className="collections collections-serials">
               <h2 className="title-2">Популярные сериалы</h2>
               <div className="collections__wrapper">
-                {collections[1].map(
-                  (filmData) =>
-                    filmData.poster &&
-                    filmData.poster.url && (
-                      <Film key={filmData.id} film={filmData} />
-                    )
-                )}
+                  {collections[1].map(
+                    (filmData) =>
+                      filmData.poster &&
+                      filmData.poster.previewUrl && (
+                        <Film key={filmData.id} film={filmData} />
+                      )
+                  )}
               </div>
             </div>
             <div className="collections collections-new">
@@ -37,7 +40,7 @@ export default memo(function FilmCollections() {
                 {collections[0].map(
                   (filmData) =>
                     filmData.poster &&
-                    filmData.poster.url && (
+                    filmData.poster.previewUrl && (
                       <Film key={filmData.id} film={filmData} />
                     )
                 )}

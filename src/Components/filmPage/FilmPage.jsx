@@ -110,7 +110,7 @@ export default memo(function FilmPage() {
             </div>
           </div>
           <Player kpId={film.id} />
-          {film.sequelsAndPrequels && (
+          {(film.sequelsAndPrequels && film.sequelsAndPrequels.length > 0) &&  (
             <div className="movie__sequels">
               <h3 className="movie__sequels--title">Сиквелы/Приквелы</h3>
               <div className="movie__list collections__wrapper">
@@ -120,7 +120,7 @@ export default memo(function FilmPage() {
               </div>
             </div>
           )}
-          {film.similarMovies && (
+          {(film.similarMovies && film.similarMovies.length > 0) && (
           <div className="movie__similar">
             <h3 className="movie__similar--title">Похожие фильмы</h3>
             <div className="movie__list collections__wrapper">
