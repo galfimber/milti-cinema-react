@@ -1,6 +1,7 @@
 import { useAppContext } from "../../context/AppContext";
 import Film from "../film/Film";
 import Auth from "../profile/Auth";
+import Profile from "./../profile/Profile";
 
 export default function MyFilms() {
   const { user, likedMovies, toggleLike } = useAppContext();
@@ -13,18 +14,23 @@ export default function MyFilms() {
         {/* <AuthDetails /> */}
         {user ? (
           <>
-            <h2 className="title-2">Вы смотрите</h2>
+            <h2 className="my-films__title">Вы смотрите</h2>
             <div className="my-films__items">
               {likedMovies.map((filmData) => (
-                <Film key={filmData.id} film={filmData} toggleLike={toggleLike} />
+                <Film
+                  key={filmData.id}
+                  film={filmData}
+                  toggleLike={toggleLike}
+                />
               ))}
             </div>
           </>
         ) : (
-          <>
-            <div>Вы не авторизованы</div>
-            <Auth user={user} />
-          </>
+          // <div className="profile__unauth">
+          //   <div>Вы не авторизованы</div>
+          //   <Auth user={user} />
+          // </div>
+          <Profile/>
         )}
       </div>
     </section>

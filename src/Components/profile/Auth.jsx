@@ -11,7 +11,7 @@ function Auth() {
         </button>
       ) : (
         <button className="profile__btn" onClick={signInWithGoogle}>
-          Войти через Google
+          Войти
         </button>
       )}
     </div>

@@ -16,12 +16,11 @@ export default function Profile() {
               />
               <div className="profile__name">{user.displayName}</div>
               <div className="profile__email">{user.email}</div>
+              <Auth />
             </>
           ) : (
-            <div>Вы не авторизованы</div>
+            <div className="profile__unauth">Вы не авторизованы</div>
           )}
-
-          <Auth />
         </div>
       </div>
     </section>

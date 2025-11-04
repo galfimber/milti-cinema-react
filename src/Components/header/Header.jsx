@@ -6,20 +6,16 @@ import {
   faBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import Auth from "./../profile/Auth";
 
 export default function Header() {
   const { user } = useAppContext();
   return (
     <header className="header">
       <Link to={`/`} className="link">
-        <div className="logo">Multi Cinema</div>
+        <div className="header__logo">Multi Cinema</div>
       </Link>
-      {/* <nav className="nav">
-        <button className="nav__item">Фильмы</button>
-        <button className="nav__item">Сериалы</button>
-        <button className="nav__item">Мультфильмы</button>
-      </nav> */}
-      <div className="search">
+      <div className="header__menu">
         <Link to={`/my-films`} className="link my-watch">
           <FontAwesomeIcon icon={faBookmark} />
           <span>Мои фильмы</span>
@@ -34,9 +30,7 @@ export default function Header() {
             />
           </Link>
         ) : (
-          <Link to={`/profile`} className="link">
-            Войти
-          </Link>
+          <Auth/>
         )}
       </div>
     </header>
