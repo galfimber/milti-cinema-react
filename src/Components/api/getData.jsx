@@ -56,7 +56,7 @@ export const searchByName = async (filmName, setData, setPages,setIsLoading, pag
       };
 
       const fetchResponse = await fetch(
-        "https://api.kinopoisk.dev/v1.3/movie?" +
+        "https://api.poiskkino.dev/v1.3/movie?" +
           new URLSearchParams({
             page: page.toString(),
             limit: "25",
@@ -107,7 +107,7 @@ export const searchById = async (filmId, setFilm, setIsLoading) => {
       };
 
       const fetchResponse = await fetch(
-        `https://api.kinopoisk.dev/v1.4/movie/${filmId}`,
+        `https://api.poiskkino.dev/v1.4/movie/${filmId}`,
         options
       );
 
@@ -149,7 +149,7 @@ export const searchCollections = async (setData, setIsLoading) => {
 
       const [fetchResponse1, fetchResponse2] = await Promise.all([
         fetch(
-          "https://api.kinopoisk.dev/v1.4/movie?" +
+          "https://api.poiskkino.dev/v1.4/movie?" +
             new URLSearchParams({
               page: "1",
               limit: "25",
@@ -162,7 +162,7 @@ export const searchCollections = async (setData, setIsLoading) => {
           options
         ),
         fetch(
-          "https://api.kinopoisk.dev/v1.4/movie?" +
+          "https://api.poiskkino.dev/v1.4/movie?" +
             new URLSearchParams({
               page: "1",
               limit: "25",

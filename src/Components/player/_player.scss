@@ -1,8 +1,25 @@
-.kinobox_player {
+@use "../../styles/base/vars" as v;
+
+.player {
   width: 1100px;
   margin: 0 auto;
-  max-height: 600px;
+  // max-height: 600px;
   min-height: 200px;
+  &__types {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+    overflow-x: auto;
+  }
+  &__type {
+    transition: 0.2s ease-out;
+    &--active {
+      color: v.$accent;
+    }
+    &:hover {
+      color: v.$accent;
+    }
+  }
 
   .premier {
     font-size: 30px;

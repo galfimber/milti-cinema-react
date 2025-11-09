@@ -2,7 +2,15 @@ import { useEffect } from "react";
 import { useAppContext } from "../../context/AppContext";
 
 export default function KinoboxPlayer({ kpId }) {
-  const { link, setLink, film } = useAppContext();
+  const {
+    link,
+    setLink,
+    film,
+    players,
+    setPlayers,
+    activePlayer,
+    setActivePlayer,
+  } = useAppContext();
 
   useEffect(() => {
     getPlayer();
@@ -25,17 +33,34 @@ export default function KinoboxPlayer({ kpId }) {
     );
     const response = await fetchResponse.json();
     if (response) {
-      const url = response.data[5].iframeUrl;
-      setLink(url);
+      setPlayers(response.data);
+      setActivePlayer(response.data[5]);
+      setLink(response.data[5].iframeUrl);
     }
   };
 
-  console.log(film.premiere.world);
+  const togglePlayer = (player) => {
+    setActivePlayer(player);
+    setLink(player.iframeUrl);
+  };
+
   const date = new Date(film.premiere.world);
-  console.log(date);
 
   return (
-    <div className="kinobox_player movie__player">
+    <div className="player movie__player">
+      <div className="player__types">
+        {players.map((player) => (
+          <button
+            className={`player__type ${
+              player.type === activePlayer.type ? "player__type--active" : ""
+            }`}
+            key={player.type}
+            onClick={() => togglePlayer(player)}
+          >
+            {player.type}
+          </button>
+        ))}
+      </div>
       {link ? (
         <iframe
           id="inlineFrameExample"

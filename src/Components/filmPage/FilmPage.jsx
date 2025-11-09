@@ -29,7 +29,10 @@ export default memo(function FilmPage() {
   return (
     <>
       <section className="movie" data-id={film.id}>
-        {film.backdrop && film.backdrop.url && film.logo && film.logo.previewUrl ? (
+        {film.backdrop &&
+        film.backdrop.url &&
+        film.logo &&
+        film.logo.previewUrl ? (
           <>
             <div className="movie__backdrop">
               <img
@@ -74,7 +77,7 @@ export default memo(function FilmPage() {
         )}
 
         <div className="movie__container">
-          <div className="movie__info">
+          <div className="movie__logo">
             {film.poster && film.poster.previewUrl && (
               <img
                 className="movie__img"
@@ -82,35 +85,54 @@ export default memo(function FilmPage() {
                 alt={film.name}
               />
             )}
-            <div className="movie__info--wrapper">
-              {film.year && (
-                <div className="movie__year">Год выхода: {film.year} г.</div>
-              )}
-              {film.genres.length > 0 && (
-                <div className="movie__genres">
-                  Жанры: {film.genres.map((genre) => `${genre.name} `)}
-                </div>
-              )}
-              {!!film.movieLength && (
-                <div className="movie__movieLength">
-                  Продолжительность: {film.movieLength} мин.
-                </div>
-              )}
-              {film.rating.imdb !== 0 && (
-                <div className="movie__rating">Рейтинг: {film.rating.imdb}</div>
-              )}
-              {!!film.ageRating && (
-                <div className="movie__ageRating">
-                  Возрастной рейтинг: {film.ageRating}+
-                </div>
-              )}
-              {!!film.description && (
-                <div className="movie__description">{film.description}</div>
-              )}
-            </div>
           </div>
           <Player kpId={film.id} />
-          {(film.sequelsAndPrequels && film.sequelsAndPrequels.length > 0) &&  (
+          <div className="movie__info">
+            {film.year && (
+              <div className="movie__year">Год выхода: {film.year} г.</div>
+            )}
+            {film.genres.length > 0 && (
+              <div className="movie__genres">
+                Жанры: {film.genres.map((genre) => `${genre.name} `)}
+              </div>
+            )}
+            {!!film.movieLength && (
+              <div className="movie__movieLength">
+                Продолжительность: {film.movieLength} мин.
+              </div>
+            )}
+            {film.rating.imdb !== 0 && (
+              <div className="movie__rating">Рейтинг: {film.rating.imdb}</div>
+            )}
+            {!!film.ageRating && (
+              <div className="movie__ageRating">
+                Возрастной рейтинг: {film.ageRating}+
+              </div>
+            )}
+            {!!film.description && (
+              <div className="movie__description">{film.description}</div>
+            )}
+          </div>
+          {/* <div className="movie__actors">
+            <h3 className="movie__actors--title">Актеры</h3>
+            <div className="movie__actors--row">
+              {film.persons.map(
+                (actor, index) =>
+                  actor.enProfession === "actor" &&
+                  index < 10 && (
+                    <div className="movie__actor" key={actor.name}>
+                      <img
+                        className="movie__actor--img"
+                        src={actor.photo}
+                        alt={actor.name}
+                      />
+                      <div className="movie__actor--name">{actor.name}</div>
+                    </div>
+                  )
+              )}
+            </div>
+          </div> */}
+          {film.sequelsAndPrequels && film.sequelsAndPrequels.length > 0 && (
             <div className="movie__sequels">
               <h3 className="movie__sequels--title">Сиквелы/Приквелы</h3>
               <div className="movie__list collections__wrapper">
@@ -120,15 +142,16 @@ export default memo(function FilmPage() {
               </div>
             </div>
           )}
-          {(film.similarMovies && film.similarMovies.length > 0) && (
-          <div className="movie__similar">
-            <h3 className="movie__similar--title">Похожие фильмы</h3>
-            <div className="movie__list collections__wrapper">
-              {film.similarMovies.map((similarMovie) => (
-                <Film key={similarMovie.id} film={similarMovie} />
-              ))}
+          {film.similarMovies && film.similarMovies.length > 0 && (
+            <div className="movie__similar">
+              <h3 className="movie__similar--title">Похожие фильмы</h3>
+              <div className="movie__list collections__wrapper">
+                {film.similarMovies.map((similarMovie) => (
+                  <Film key={similarMovie.id} film={similarMovie} />
+                ))}
+              </div>
             </div>
-          </div>)}
+          )}
         </div>
       </section>
     </>

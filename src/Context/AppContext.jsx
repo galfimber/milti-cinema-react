@@ -8,6 +8,7 @@ import { useFilm } from "../hooks/useFilm";
 import { useCollections } from "../hooks/useCollections";
 import { usePages } from "../hooks/usePages";
 import { useLink } from "../hooks/useLink";
+import { usePlayers } from "../hooks/usePlayers";
 
 const AppContext = createContext();
 
@@ -21,6 +22,8 @@ export const AppProvider = ({ children }) => {
   const { collections, setCollections } = useCollections({});
   const { pages, setPages } = usePages();
   const { link, setLink } = useLink("");
+  const { players, setPlayers } = usePlayers([]);
+  const { activePlayer, setActivePlayer } = usePlayers([]);
 
   return (
     <AppContext.Provider
@@ -42,6 +45,10 @@ export const AppProvider = ({ children }) => {
         setPages,
         link,
         setLink,
+        players,
+        setPlayers,
+        activePlayer,
+        setActivePlayer,
       }}
     >
       {children}
