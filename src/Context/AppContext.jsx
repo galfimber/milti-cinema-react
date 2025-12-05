@@ -9,6 +9,7 @@ import { useCollections } from "../hooks/useCollections";
 import { usePages } from "../hooks/usePages";
 import { useLink } from "../hooks/useLink";
 import { usePlayers } from "../hooks/usePlayers";
+import { useActor } from "../hooks/useActor";
 
 const AppContext = createContext();
 
@@ -24,6 +25,7 @@ export const AppProvider = ({ children }) => {
   const { link, setLink } = useLink("");
   const { players, setPlayers } = usePlayers([]);
   const { activePlayer, setActivePlayer } = usePlayers([]);
+  const { isActor, setIsActor } = useActor(false);
 
   return (
     <AppContext.Provider
@@ -49,6 +51,8 @@ export const AppProvider = ({ children }) => {
         setPlayers,
         activePlayer,
         setActivePlayer,
+        isActor,
+        setIsActor,
       }}
     >
       {children}

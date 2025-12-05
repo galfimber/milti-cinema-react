@@ -9,10 +9,15 @@ import Film from "../film/Film";
 
 export default memo(function FilmPage() {
   const location = useLocation();
-  const { film, setFilm } = useAppContext();
+  const { film, setFilm, isActor, setIsActor } = useAppContext();
   const { isLoading, setIsLoading } = useLoading();
 
   const { id } = useParams();
+
+  const isPerson = (persons) => {
+    persons.find((person) => person.enProfession === "actor") &&
+      setIsActor(true);
+  };
 
   useEffect(() => {
     // if (location.state?.data) {
@@ -25,6 +30,8 @@ export default memo(function FilmPage() {
   }, [location.state]);
 
   if (isLoading) return <div>Загрузка...</div>;
+
+  isPerson(film.persons);
 
   return (
     <>
@@ -88,9 +95,9 @@ export default memo(function FilmPage() {
           </div>
           <Player kpId={film.id} />
           <div className="movie__info">
-            {film.year && (
-              <div className="movie__year">Год выхода: {film.year} г.</div>
-            )}
+            <div className="movie__year">
+              Год выхода: {film.year || "Пока неизвестно"}
+            </div>
             {film.genres.length > 0 && (
               <div className="movie__genres">
                 Жанры: {film.genres.map((genre) => `${genre.name} `)}
@@ -113,25 +120,28 @@ export default memo(function FilmPage() {
               <div className="movie__description">{film.description}</div>
             )}
           </div>
-          {/* <div className="movie__actors">
-            <h3 className="movie__actors--title">Актеры</h3>
-            <div className="movie__actors--row">
-              {film.persons.map(
-                (actor, index) =>
-                  actor.enProfession === "actor" &&
-                  index < 10 && (
-                    <div className="movie__actor" key={actor.name}>
-                      <img
-                        className="movie__actor--img"
-                        src={actor.photo}
-                        alt={actor.name}
-                      />
-                      <div className="movie__actor--name">{actor.name}</div>
-                    </div>
-                  )
-              )}
+
+          {isActor && (
+            <div className="movie__actors">
+              <h3 className="movie__actors--title">Актеры</h3>
+              <div className="movie__actors--row">
+                {film.persons.map(
+                  (actor, index) =>
+                    actor.enProfession === "actor" &&
+                    index < 10 && (
+                      <div className="movie__actor" key={actor.name}>
+                        <img
+                          className="movie__actor--img"
+                          src={actor.photo}
+                          alt={actor.name}
+                        />
+                        <div className="movie__actor--name">{actor.name}</div>
+                      </div>
+                    )
+                )}
+              </div>
             </div>
-          </div> */}
+          )}
           {film.sequelsAndPrequels && film.sequelsAndPrequels.length > 0 && (
             <div className="movie__sequels">
               <h3 className="movie__sequels--title">Сиквелы/Приквелы</h3>

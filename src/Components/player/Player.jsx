@@ -15,6 +15,7 @@ export default function KinoboxPlayer({ kpId }) {
   useEffect(() => {
     getPlayer();
   }, [film]);
+  let isPlayer = false;
   const getPlayer = async () => {
     const options = {
       method: "GET",
@@ -34,8 +35,20 @@ export default function KinoboxPlayer({ kpId }) {
     const response = await fetchResponse.json();
     if (response) {
       setPlayers(response.data);
-      setActivePlayer(response.data[5]);
-      setLink(response.data[5].iframeUrl);
+      if (response.data[6].iframeUrl) {
+        setActivePlayer(response.data[6]);
+        setLink(response.data[6].iframeUrl);
+        isPlayer = true;
+      } else {
+        for (let playerNum = 0; playerNum <= 6; playerNum++) {
+          if (response.data[playerNum].iframeUrl) {
+            setActivePlayer(response.data[playerNum]);
+            setLink(response.data[playerNum].iframeUrl);
+            isPlayer = true;
+            break;
+          }
+        }
+      }
     }
   };
 
@@ -48,33 +61,38 @@ export default function KinoboxPlayer({ kpId }) {
 
   return (
     <div className="player movie__player">
-      <div className="player__types">
-        {players.map((player) => (
-          <button
-            className={`player__type ${
-              player.type === activePlayer.type ? "player__type--active" : ""
-            }`}
-            key={player.type}
-            onClick={() => togglePlayer(player)}
-          >
-            {player.type}
-          </button>
-        ))}
-      </div>
       {link ? (
-        <iframe
-          id="inlineFrameExample"
-          title="Inline Frame Map"
-          width="100%"
-          height="600px"
-          frameborder="1"
-          allowfullscreen="true"
-          src={link}
-        ></iframe>
+        <>
+          <div className="player__types">
+            {players.map((player) => (
+              <button
+                className={`player__type ${
+                  player.type === activePlayer.type
+                    ? "player__type--active"
+                    : ""
+                }`}
+                key={player.type}
+                onClick={() => togglePlayer(player)}
+              >
+                {player.type}
+              </button>
+            ))}
+          </div>
+          <iframe
+            id="inlineFrameExample"
+            title="Inline Frame Map"
+            width="100%"
+            height="600px"
+            frameborder="1"
+            allowfullscreen="true"
+            src={link}
+          ></iframe>
+        </>
       ) : (
         <div className="premier">
-          Дата выхода: {date.getDate()}.{date.getMonth() + 1}.
-          {date.getFullYear()}{" "}
+          {isPlayer
+            ? "Попробуйте другой плеер"
+            : "К сожалению фильм пока недоступен"}
         </div>
       )}
     </div>

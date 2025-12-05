@@ -35,7 +35,13 @@ const KEY = [
   "5HY9A2G-Z6PM1C1-M7Q5YFG-D23RKER",
 ];
 
-export const searchByName = async (filmName, setData, setPages,setIsLoading, page = 1) => {
+export const searchByName = async (
+  filmName,
+  setData,
+  setPages,
+  setIsLoading,
+  page = 1
+) => {
   function handlePaginationUpdate(response) {
     setPages((prev) => ({
       ...prev,
@@ -149,29 +155,16 @@ export const searchCollections = async (setData, setIsLoading) => {
 
       const [fetchResponse1, fetchResponse2] = await Promise.all([
         fetch(
-          "https://api.poiskkino.dev/v1.4/movie?" +
+          "https://api.poiskkino.dev/v1.5/list/planned-to-watch-films?" +
             new URLSearchParams({
-              page: "1",
-              limit: "25",
-              sortField: "votes.await",
-              sortType: "-1",
-              "votes.await": "1000-6666666",
-              year: new Date().getFullYear(),
-              status: "completed",
+              limit: "100",
             }),
           options
         ),
         fetch(
-          "https://api.poiskkino.dev/v1.4/movie?" +
+          "https://api.poiskkino.dev/v1.5/list/popular-series?" +
             new URLSearchParams({
-              page: "1",
               limit: "25",
-              sortField: "votes.imdb",
-              sortType: "-1",
-              isSeries: "true",
-              year: `${
-                new Date().getFullYear() - 5
-              }-${new Date().getFullYear()}`,
             }),
           options
         ),
@@ -195,7 +188,7 @@ export const searchCollections = async (setData, setIsLoading) => {
       const data1 = await fetchResponse1.json();
       const data2 = await fetchResponse2.json();
 
-      setData([data1.docs, data2.docs]);
+      setData([data1.movies.docs, data2.movies.docs]);
       setIsLoading(false);
       return;
     } catch (error) {

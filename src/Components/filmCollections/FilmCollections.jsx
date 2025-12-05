@@ -27,9 +27,9 @@ export default memo(function FilmCollections() {
               <div className="collections__wrapper">
                   {collections[1].map(
                     (filmData) =>
-                      filmData.poster &&
-                      filmData.poster.previewUrl && (
-                        <Film key={filmData.id} film={filmData} />
+                      filmData.movie.poster &&
+                      filmData.movie.poster.previewUrl && (
+                        <Film key={filmData.movie.id} film={filmData.movie} />
                       )
                   )}
               </div>
@@ -39,9 +39,9 @@ export default memo(function FilmCollections() {
               <div className="collections__wrapper">
                 {collections[0].map(
                   (filmData) =>
-                    filmData.poster &&
-                    filmData.poster.previewUrl && (
-                      <Film key={filmData.id} film={filmData} />
+                    filmData.movie.poster &&
+                    filmData.movie.poster.previewUrl && (
+                      <Film key={filmData.movie.id} film={filmData.movie} />
                     )
                 )}
               </div>
