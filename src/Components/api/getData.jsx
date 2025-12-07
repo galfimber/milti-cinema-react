@@ -157,7 +157,7 @@ export const searchCollections = async (setData, setIsLoading) => {
         fetch(
           "https://api.poiskkino.dev/v1.5/list/planned-to-watch-films?" +
             new URLSearchParams({
-              limit: "100",
+              limit: "50",
             }),
           options
         ),

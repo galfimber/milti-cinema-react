@@ -1,4 +1,5 @@
-.collections,
+@use "../../styles/base/vars" as v;
+
 .collections {
   padding-top: 50px;
   &__wrapper {
@@ -6,5 +7,17 @@
     gap: 20px;
     padding-top: 20px;
     overflow-x: auto;
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+    &::-webkit-scrollbar-track {
+      background: v.$page-bg-accent;
+      border-radius: 20px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: v.$accent;
+      border-radius: 20px;
+      border: 3px solid v.$page-bg-accent;
+    }
   }
 }

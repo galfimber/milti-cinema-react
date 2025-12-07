@@ -27,6 +27,20 @@ img {
   padding: 25px 0;
 }
 
+body::-webkit-scrollbar {
+  width: 15px; /* Ширина всего элемента навигации */
+}
+
+body::-webkit-scrollbar-track {
+  background: v.$page-bg; /* Цвет дорожки */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: v.$accent; /* Цвет бегунка */
+  border-radius: 20px; /* Округление бегунка */
+  border: 3px solid v.$page-bg; /* Оформление границ бегунка */
+}
+
 .container {
   max-width: v.$container-width;
   padding: 0 v.$container-padding;
