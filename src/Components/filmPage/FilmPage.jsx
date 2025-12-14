@@ -18,6 +18,7 @@ export default memo(function FilmPage() {
     persons.find((person) => person.enProfession === "actor") &&
       setIsActor(true);
   };
+  //Переписать тут без хука, например просто отфильтровать и отобразить новый массив
 
   useEffect(() => {
     // if (location.state?.data) {

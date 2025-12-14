@@ -61,15 +61,154 @@ export const searchByName = async (
         },
       };
 
+      let params = new URLSearchParams({
+        page: page.toString(),
+        limit: "30",
+        query: filmName,
+      });
+
       const fetchResponse = await fetch(
-        "https://api.poiskkino.dev/v1.3/movie?" +
-          new URLSearchParams({
-            page: page.toString(),
-            limit: "25",
-            sortField: "votes.imdb",
-            sortType: "-1",
-            name: filmName,
-          }),
+        "https://api.poiskkino.dev/v1.4/movie/search?" + params,
+        options
+      );
+
+      if (!fetchResponse.ok) {
+        if (fetchResponse.status === 401 || fetchResponse.status === 403) {
+          console.log(`API key ${keyIndex} failed, trying next key...`);
+          continue;
+        }
+        throw new Error(
+          `API request failed with status ${fetchResponse.status}`
+        );
+      }
+
+      response = await fetchResponse.json();
+      break;
+    } catch (error) {
+      console.error(`Error with API key ${keyIndex}:`, error);
+
+      if (keyIndex === KEY.length - 1) {
+        throw new Error("All API keys failed");
+      }
+    }
+  }
+
+  if (response) {
+    handlePaginationUpdate(response);
+    setData(response.docs);
+  }
+  setIsLoading(false);
+};
+
+export const searchByGenre = async (
+  genre,
+  setData,
+  setPages,
+  setIsLoading,
+  page = 1
+) => {
+  function handlePaginationUpdate(response) {
+    setPages((prev) => ({
+      ...prev,
+      actual: response.page,
+      all: response.pages,
+    }));
+  }
+
+  let response;
+  for (let keyIndex = 0; keyIndex < KEY.length; keyIndex++) {
+    try {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "X-API-KEY": KEY[keyIndex],
+        },
+      };
+
+      let params = new URLSearchParams({
+        page: page.toString(),
+        limit: "30",
+        sortField: "year",
+        sortType: "-1",
+        year: `1990-${new Date().getFullYear()}`,
+      });
+      params.append("sortField", "votes.imdb");
+      params.append("sortType", "-1");
+      genre === "сериалы"
+        ? params.append("isSeries", "true")
+        : params.append("genres.name", genre);
+
+      const fetchResponse = await fetch(
+        "https://api.poiskkino.dev/v1.4/movie?" + params,
+        options
+      );
+
+      if (!fetchResponse.ok) {
+        if (fetchResponse.status === 401 || fetchResponse.status === 403) {
+          console.log(`API key ${keyIndex} failed, trying next key...`);
+          continue;
+        }
+        throw new Error(
+          `API request failed with status ${fetchResponse.status}`
+        );
+      }
+
+      response = await fetchResponse.json();
+      break;
+    } catch (error) {
+      console.error(`Error with API key ${keyIndex}:`, error);
+
+      if (keyIndex === KEY.length - 1) {
+        throw new Error("All API keys failed");
+      }
+    }
+  }
+
+  if (response) {
+    handlePaginationUpdate(response);
+    setData(response.docs);
+  }
+  setIsLoading(false);
+};
+
+export const searchByActor = async (
+  actor,
+  setData,
+  setPages,
+  setIsLoading,
+  page = 1
+) => {
+  function handlePaginationUpdate(response) {
+    setPages((prev) => ({
+      ...prev,
+      actual: response.page,
+      all: response.pages,
+    }));
+  }
+
+  let response;
+  for (let keyIndex = 0; keyIndex < KEY.length; keyIndex++) {
+    try {
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "X-API-KEY": KEY[keyIndex],
+        },
+      };
+
+      let params = new URLSearchParams({
+        page: page.toString(),
+        limit: "30",
+        sortField: "year",
+        sortType: "-1",
+      });
+      params.append("sortField", "votes.imdb");
+      params.append("sortType", "-1");
+
+      const fetchResponse = await fetch(
+        `https://api.poiskkino.dev/v1.4/person/${actor}` + params,
         options
       );
 

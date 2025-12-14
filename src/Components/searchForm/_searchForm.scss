@@ -1,8 +1,22 @@
 @use "../../styles/base/vars" as v;
+.search-form {
+  &__wrapper {
+    display: flex;
+    gap: 50px;
+    align-items: flex-end;
+  }
+}
 .form {
-  display: flex;
-  gap: 15px;
-  align-items: center;
+  &__search--name {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  &__search--genre {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
   &__input {
     width: 500px;
     padding: 10px 20px;
@@ -11,21 +25,57 @@
     -webkit-box-shadow: 0px 0px 0px 0px v.$accent;
     -moz-box-shadow: 0px 0px 0px 0px v.$accent;
     box-shadow: 0px 0px 0px 0px v.$accent;
-    transition: .2s ease-out;
-    &:focus{
+    transition: 0.2s ease-out;
+    &:focus {
       -webkit-box-shadow: 0px 0px 8px 0px v.$accent;
       -moz-box-shadow: 0px 0px 8px 0px v.$accent;
       box-shadow: 0px 0px 8px 0px v.$accent;
     }
   }
-  &__btn{
-    transition: color .2s ease-out;
-    &:hover{
+  &__btn {
+    transition: color 0.2s ease-out;
+    &:hover {
       color: v.$accent;
     }
   }
 }
+
+.genres {
+  &__label {
+    cursor: default;
+  }
+  &__select {
+    width: 222px;
+    padding: 10px 20px;
+    outline: none;
+    background-color: v.$page-bg-accent;
+    border: none;
+    border-radius: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6"><path d="M0 0l6 6 6-6z" fill="%23333"/></svg>');
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    padding-right: 30px;
+    &:hover {
+      cursor: pointer;
+    }
+    &:focus {
+      -webkit-box-shadow: 0px 0px 8px 0px v.$accent;
+      -moz-box-shadow: 0px 0px 8px 0px v.$accent;
+      box-shadow: 0px 0px 8px 0px v.$accent;
+    }
+  }
+}
+
 @media (max-width: 1130px) {
+  .search-form {
+    &__wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
   .form {
     &__input {
       width: 400px;
