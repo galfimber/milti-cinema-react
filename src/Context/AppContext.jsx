@@ -10,6 +10,8 @@ import { usePages } from "../hooks/usePages";
 import { useLink } from "../hooks/useLink";
 import { usePlayers } from "../hooks/usePlayers";
 import { useActor } from "../hooks/useActor";
+import { useFetchMethod } from "../hooks/useFetchMethod";
+import { useGenre } from "../hooks/useGenre";
 
 const AppContext = createContext();
 
@@ -26,6 +28,8 @@ export const AppProvider = ({ children }) => {
   const { players, setPlayers } = usePlayers([]);
   const { activePlayer, setActivePlayer } = usePlayers([]);
   const { isActor, setIsActor } = useActor(false);
+  const { fetchMethod, setFetchMethod } = useFetchMethod("");
+  const { genre, setGenre } = useGenre("");
 
   return (
     <AppContext.Provider
@@ -53,6 +57,10 @@ export const AppProvider = ({ children }) => {
         setActivePlayer,
         isActor,
         setIsActor,
+        fetchMethod,
+        setFetchMethod,
+        genre,
+        setGenre,
       }}
     >
       {children}

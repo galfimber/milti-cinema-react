@@ -4,7 +4,7 @@ import { searchByName, searchByGenre } from "../api/getData";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchForm({}) {
-  const { setFilmName, setData, setPages, setIsLoading } =
+  const { setFilmName, setData, setPages, setIsLoading, setFetchMethod, setGenre } =
     useAppContext();
   const [localFilmName, setLocalFilmName] = useState("");
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export default function SearchForm({}) {
     (e) => {
       e.preventDefault();
       setIsLoading(true);
+      setFetchMethod("searchByName");
       setFilmName(localFilmName);
       searchByName(localFilmName, setData, setPages, setIsLoading);
       navigate("/search-result");
@@ -22,6 +23,8 @@ export default function SearchForm({}) {
   const searchGenre = useCallback(
     (genre) => {
       setIsLoading(true);
+      setGenre(genre);
+      setFetchMethod("searchByGenre");
       searchByGenre(genre, setData, setPages, setIsLoading);
       navigate("/search-result");
     },

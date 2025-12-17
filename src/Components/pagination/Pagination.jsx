@@ -1,14 +1,15 @@
 import { useMemo, useCallback } from "react";
 import { useAppContext } from "../../context/AppContext";
-import { searchByName } from "../api/getData";
+import { searchByName, searchByGenre } from "../api/getData";
 
 export default function Pagination() {
-  const { filmName, setData, pages, setPages, setIsLoading } =
+  const { filmName, setData, pages, setPages, setIsLoading, fetchMethod, genre } =
     useAppContext();
 
   const searchNewPage = useCallback((page) => {
+    fetchMethod === "searchByName" ? searchByName(filmName, setData, setPages, setIsLoading, page) : searchByGenre(genre, setData, setPages, setIsLoading, page);
     setIsLoading(true);
-    searchByName(filmName, setData, setPages, setIsLoading, page);
+    // searchByName(filmName, setData, setPages, setIsLoading, page);
     window.scrollTo(0, 0);
   });
 

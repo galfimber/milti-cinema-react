@@ -6,7 +6,7 @@ export default function FilmList() {
   const { data, isLoading } =
     useAppContext();
 
-  if (isLoading) return <div className="film-list">Загрузка фильмов...</div>;
+  if (isLoading) return <div className="film-list--loading">Загрузка фильмов...</div>;
 
   return (
     <>

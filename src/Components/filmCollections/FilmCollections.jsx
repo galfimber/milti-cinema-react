@@ -8,9 +8,6 @@ export default memo(function FilmCollections() {
   const { collections, setCollections } = useAppContext();
   const { isLoading, setIsLoading } = useLoading();
 
-  const params = {
-    spaceBetween: 20,
-  };
   useEffect(() => {
     if (collections.length > 0) return setIsLoading(false);
 

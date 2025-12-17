@@ -110,7 +110,7 @@ export default memo(function FilmPage() {
               </div>
             )}
             {film.rating.imdb !== 0 && (
-              <div className="movie__rating">Рейтинг: {film.rating.imdb}</div>
+              <div className="movie__rating">Рейтинг: {film.rating.imdb}/10</div>
             )}
             {!!film.ageRating && (
               <div className="movie__ageRating">
@@ -129,7 +129,7 @@ export default memo(function FilmPage() {
                 {film.persons.map(
                   (actor, index) =>
                     actor.enProfession === "actor" &&
-                    index < 10 && (
+                    index < 10 && actor.photo && actor.name && (
                       <div className="movie__actor" key={actor.name}>
                         <img
                           className="movie__actor--img"
