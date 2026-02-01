@@ -33,11 +33,12 @@ export default function KinoboxPlayer({ kpId }) {
       options
     );
     const response = await fetchResponse.json();
+    console.log((response.data).find(item => item.type == "Collaps"));
     if (response) {
       setPlayers(response.data);
-      if (response.data[6].iframeUrl) {
-        setActivePlayer(response.data[6]);
-        setLink(response.data[6].iframeUrl);
+      if ((response.data).find(item => item.type == "Collaps") && (response.data).find(item => item.type == "Collaps").iframeUrl) {
+        setActivePlayer((response.data).find(item => item.type == "Collaps"));
+        setLink((response.data).find(item => item.type == "Collaps").iframeUrl);
         isPlayer = true;
       } else {
         for (let playerNum = 0; playerNum <= 6; playerNum++) {
