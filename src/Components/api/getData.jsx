@@ -129,12 +129,15 @@ export const searchByGenre = async (
       let params = new URLSearchParams({
         page: page.toString(),
         limit: "30",
-        sortField: "year",
+        sortField: "votes.imdb",
         sortType: "-1",
         year: `1990-${new Date().getFullYear()}`,
+        notNullFields: "name",
       });
-      params.append("sortField", "votes.imdb");
+      params.append("notNullFields", "poster.url")
+      params.append("sortField", "year");
       params.append("sortType", "-1");
+      params.append("status", "completed");
       genre === "сериалы"
         ? params.append("isSeries", "true")
         : params.append("genres.name", genre);

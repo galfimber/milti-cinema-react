@@ -15,7 +15,9 @@ export default function KinoboxPlayer({ kpId }) {
   useEffect(() => {
     getPlayer();
   }, [film]);
+
   let isPlayer = false;
+
   const getPlayer = async () => {
     const options = {
       method: "GET",
@@ -30,15 +32,18 @@ export default function KinoboxPlayer({ kpId }) {
           token: "eedefb541aeba871dcfc756e6b31c02e",
           kinopoisk: kpId,
         }),
-      options
+      options,
     );
     const response = await fetchResponse.json();
-    console.log((response.data).find(item => item.type == "Collaps"));
+    console.log(response.data.find((item) => item.type == "Collaps"));
     if (response) {
       setPlayers(response.data);
-      if ((response.data).find(item => item.type == "Collaps") && (response.data).find(item => item.type == "Collaps").iframeUrl) {
-        setActivePlayer((response.data).find(item => item.type == "Collaps"));
-        setLink((response.data).find(item => item.type == "Collaps").iframeUrl);
+      if (
+        response.data.find((item) => item.type == "Collaps") &&
+        response.data.find((item) => item.type == "Collaps").iframeUrl
+      ) {
+        setActivePlayer(response.data.find((item) => item.type == "Collaps"));
+        setLink(response.data.find((item) => item.type == "Collaps").iframeUrl);
         isPlayer = true;
       } else {
         for (let playerNum = 0; playerNum <= 6; playerNum++) {
@@ -58,37 +63,31 @@ export default function KinoboxPlayer({ kpId }) {
     setLink(player.iframeUrl);
   };
 
-  const date = new Date(film.premiere.world);
-
   return (
     <div className="player movie__player">
+      <div className="player__types">
+        {players.map((player) => (
+          <button
+            className={`player__type ${
+              player.type === activePlayer.type ? "player__type--active" : ""
+            }`}
+            key={player.type}
+            onClick={() => togglePlayer(player)}
+          >
+            {player.type}
+          </button>
+        ))}
+      </div>
       {link ? (
-        <>
-          <div className="player__types">
-            {players.map((player) => (
-              <button
-                className={`player__type ${
-                  player.type === activePlayer.type
-                    ? "player__type--active"
-                    : ""
-                }`}
-                key={player.type}
-                onClick={() => togglePlayer(player)}
-              >
-                {player.type}
-              </button>
-            ))}
-          </div>
-          <iframe
-            id="inlineFrameExample"
-            title="Inline Frame Map"
-            width="100%"
-            height="600px"
-            frameborder="1"
-            allowfullscreen="true"
-            src={link}
-          ></iframe>
-        </>
+        <iframe
+          id="inlineFrameExample"
+          title="Inline Frame Map"
+          width="100%"
+          height="600px"
+          frameborder="1"
+          allowfullscreen="true"
+          src={link}
+        ></iframe>
       ) : (
         <div className="premier">
           {isPlayer
