@@ -63,12 +63,12 @@ export const searchByName = async (
 
       let params = new URLSearchParams({
         page: page.toString(),
-        limit: "30",
+        limit: "10",
         query: filmName,
       });
 
       const fetchResponse = await fetch(
-        "https://api.poiskkino.dev/v1.4/movie/search?" + params,
+        "https://api.poiskkino.dev/v1.5/movie/search?" + params,
         options
       );
 
@@ -128,7 +128,7 @@ export const searchByGenre = async (
 
       let params = new URLSearchParams({
         page: page.toString(),
-        limit: "30",
+        limit: "10",
         sortField: "votes.imdb",
         sortType: "-1",
         year: `1990-${new Date().getFullYear()}`,
@@ -143,7 +143,7 @@ export const searchByGenre = async (
         : params.append("genres.name", genre);
 
       const fetchResponse = await fetch(
-        "https://api.poiskkino.dev/v1.4/movie?" + params,
+        "https://api.poiskkino.dev/v1.5/movie?" + params,
         options
       );
 
@@ -203,7 +203,7 @@ export const searchByActor = async (
 
       let params = new URLSearchParams({
         page: page.toString(),
-        limit: "30",
+        limit: "10",
         sortField: "year",
         sortType: "-1",
       });
@@ -211,7 +211,7 @@ export const searchByActor = async (
       params.append("sortType", "-1");
 
       const fetchResponse = await fetch(
-        `https://api.poiskkino.dev/v1.4/person/${actor}` + params,
+        `https://api.poiskkino.dev/v1.5/person/${actor}` + params,
         options
       );
 
@@ -255,7 +255,7 @@ export const searchById = async (filmId, setFilm, setIsLoading) => {
       };
 
       const fetchResponse = await fetch(
-        `https://api.poiskkino.dev/v1.4/movie/${filmId}`,
+        `https://api.poiskkino.dev/v1.5/movie/${filmId}`,
         options
       );
 
@@ -299,14 +299,14 @@ export const searchCollections = async (setData, setIsLoading) => {
         fetch(
           "https://api.poiskkino.dev/v1.5/list/planned-to-watch-films?" +
             new URLSearchParams({
-              limit: "50",
+              limit: "10",
             }),
           options
         ),
         fetch(
           "https://api.poiskkino.dev/v1.5/list/popular-series?" +
             new URLSearchParams({
-              limit: "25",
+              limit: "10",
             }),
           options
         ),

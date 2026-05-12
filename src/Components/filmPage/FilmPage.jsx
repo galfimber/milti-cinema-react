@@ -43,6 +43,7 @@ export default memo(function FilmPage() {
         film.logo.previewUrl ? (
           <>
             <div className="movie__backdrop">
+              {/* tmdb-proxy-multi-cinema.vercel.app/proxy${film.backdrop.url.slice(26)} */}
               <img
                 className="movie__backdrop--img"
                 src={film.backdrop.url}
@@ -110,7 +111,9 @@ export default memo(function FilmPage() {
               </div>
             )}
             {film.rating.imdb !== 0 && (
-              <div className="movie__rating">Рейтинг: {film.rating.imdb}/10</div>
+              <div className="movie__rating">
+                Рейтинг: {film.rating.imdb}/10
+              </div>
             )}
             {!!film.ageRating && (
               <div className="movie__ageRating">
@@ -129,7 +132,9 @@ export default memo(function FilmPage() {
                 {film.persons.map(
                   (actor, index) =>
                     actor.enProfession === "actor" &&
-                    index < 10 && actor.photo && actor.name && (
+                    index < 10 &&
+                    actor.photo &&
+                    actor.name && (
                       <div className="movie__actor" key={actor.name}>
                         <img
                           className="movie__actor--img"
@@ -138,7 +143,7 @@ export default memo(function FilmPage() {
                         />
                         <div className="movie__actor--name">{actor.name}</div>
                       </div>
-                    )
+                    ),
                 )}
               </div>
             </div>
