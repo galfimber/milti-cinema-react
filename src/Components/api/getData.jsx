@@ -255,7 +255,7 @@ export const searchById = async (filmId, setFilm, setIsLoading) => {
       };
 
       const fetchResponse = await fetch(
-        `https://api.poiskkino.dev/v1.5/movie/${filmId}`,
+        `https://api.poiskkino.dev/v1.4/movie/${filmId}`,
         options
       );
 
