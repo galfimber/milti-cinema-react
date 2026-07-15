@@ -5,7 +5,7 @@ import FilmList from "../filmList/FilmList";
 // import AuthDetails from "./auth/AuthDetails";
 import FormSearch from "../searchForm/SearchForm";
 
-export default function SearchRes({}) {
+export default function SearchRes() {
   const { data } = useAppContext();
 
   return (

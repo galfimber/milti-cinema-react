@@ -9,7 +9,6 @@ export default function Pagination() {
   const searchNewPage = useCallback((page) => {
     fetchMethod === "searchByName" ? searchByName(filmName, setData, setPages, setIsLoading, page) : searchByGenre(genre, setData, setPages, setIsLoading, page);
     setIsLoading(true);
-    // searchByName(filmName, setData, setPages, setIsLoading, page);
     window.scrollTo(0, 0);
   });
 

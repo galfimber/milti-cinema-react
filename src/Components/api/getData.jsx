@@ -33,6 +33,24 @@ const KEY = [
   "F6QX0P1-FQTMPFY-PWNT126-KXFHWZK",
   "84S4SNX-Y084WMK-K7FV73W-8G8P6MH",
   "5HY9A2G-Z6PM1C1-M7Q5YFG-D23RKER",
+  "YMAJF0V-A6WMNEN-HM4072B-R631JR7",
+  "3VYPFA8-H37MAZ9-H0JA9A5-CRAJTFN",
+  "E4M5NTH-CCY4APJ-GEF0VNT-FH3ZJWX",
+  "Q1Y93GM-MHYMWC8-HHZB8TH-9JXEAQP",
+  "Y00ZKCC-GTC447D-QSRRVGX-MDJ2MMA",
+  "MBJVRBC-E0EM846-KV3GDPC-NS6HKYW",
+  "NJP9RH6-ZC1MJZW-H4T77DZ-XG50DNG",
+  "4SRRBQZ-WTK4SV8-NN611R5-SVFSZZV",
+  "M110TH7-9A64ZBK-PXQFWXC-0S3AW6M",
+  "2YDRCN4-GJJ4VXC-HX99D0W-HDBNKW8",
+  "BJW5RB7-7EPMVH8-HYD1773-4VEDA34",
+  "B71AS27-Q9CMCW8-HXMVCB7-2K8AWZB",
+  "0QZTAKB-HX6MTJ1-N6ABCHA-MSF9HBF",
+  "ASW159B-1RX4B52-HJ2HQAE-JPB0MCA",
+  "WE5F7TA-CBS4MEF-MBENDVR-Z31P1H5",
+  "5FHER0Z-9M7MTSW-NZZ664Q-R991054",
+  "EDPCS4N-A92MQGX-GBS8P26-0ESZ5JT",
+  "E8EEGCE-EYF48XG-QN2MASG-GPS29F3",
 ];
 
 export const searchByName = async (
@@ -40,7 +58,7 @@ export const searchByName = async (
   setData,
   setPages,
   setIsLoading,
-  page = 1
+  page = 1,
 ) => {
   function handlePaginationUpdate(response) {
     setPages((prev) => ({
@@ -63,13 +81,13 @@ export const searchByName = async (
 
       let params = new URLSearchParams({
         page: page.toString(),
-        limit: "10",
+        limit: "24",
         query: filmName,
       });
 
       const fetchResponse = await fetch(
-        "https://api.poiskkino.dev/v1.5/movie/search?" + params,
-        options
+        "https://api.poiskkino.dev/v1.4/movie/search?" + params,
+        options,
       );
 
       if (!fetchResponse.ok) {
@@ -78,7 +96,7 @@ export const searchByName = async (
           continue;
         }
         throw new Error(
-          `API request failed with status ${fetchResponse.status}`
+          `API request failed with status ${fetchResponse.status}`,
         );
       }
 
@@ -105,7 +123,7 @@ export const searchByGenre = async (
   setData,
   setPages,
   setIsLoading,
-  page = 1
+  page = 1,
 ) => {
   function handlePaginationUpdate(response) {
     setPages((prev) => ({
@@ -128,23 +146,21 @@ export const searchByGenre = async (
 
       let params = new URLSearchParams({
         page: page.toString(),
-        limit: "10",
+        limit: "24",
         sortField: "votes.imdb",
         sortType: "-1",
-        year: `1990-${new Date().getFullYear()}`,
         notNullFields: "name",
       });
-      params.append("notNullFields", "poster.url")
+      params.append("notNullFields", "poster.url");
       params.append("sortField", "year");
       params.append("sortType", "-1");
-      params.append("status", "completed");
       genre === "сериалы"
         ? params.append("isSeries", "true")
         : params.append("genres.name", genre);
 
       const fetchResponse = await fetch(
-        "https://api.poiskkino.dev/v1.5/movie?" + params,
-        options
+        "https://api.poiskkino.dev/v1.4/movie?" + params,
+        options,
       );
 
       if (!fetchResponse.ok) {
@@ -153,7 +169,7 @@ export const searchByGenre = async (
           continue;
         }
         throw new Error(
-          `API request failed with status ${fetchResponse.status}`
+          `API request failed with status ${fetchResponse.status}`,
         );
       }
 
@@ -180,7 +196,7 @@ export const searchByActor = async (
   setData,
   setPages,
   setIsLoading,
-  page = 1
+  page = 1,
 ) => {
   function handlePaginationUpdate(response) {
     setPages((prev) => ({
@@ -203,7 +219,7 @@ export const searchByActor = async (
 
       let params = new URLSearchParams({
         page: page.toString(),
-        limit: "10",
+        limit: "24",
         sortField: "year",
         sortType: "-1",
       });
@@ -212,7 +228,7 @@ export const searchByActor = async (
 
       const fetchResponse = await fetch(
         `https://api.poiskkino.dev/v1.5/person/${actor}` + params,
-        options
+        options,
       );
 
       if (!fetchResponse.ok) {
@@ -221,7 +237,7 @@ export const searchByActor = async (
           continue;
         }
         throw new Error(
-          `API request failed with status ${fetchResponse.status}`
+          `API request failed with status ${fetchResponse.status}`,
         );
       }
 
@@ -256,7 +272,7 @@ export const searchById = async (filmId, setFilm, setIsLoading) => {
 
       const fetchResponse = await fetch(
         `https://api.poiskkino.dev/v1.4/movie/${filmId}`,
-        options
+        options,
       );
 
       if (!fetchResponse.ok) {
@@ -265,7 +281,7 @@ export const searchById = async (filmId, setFilm, setIsLoading) => {
           continue;
         }
         throw new Error(
-          `API request failed with status ${fetchResponse.status}`
+          `API request failed with status ${fetchResponse.status}`,
         );
       }
 
@@ -299,16 +315,16 @@ export const searchCollections = async (setData, setIsLoading) => {
         fetch(
           "https://api.poiskkino.dev/v1.5/list/planned-to-watch-films?" +
             new URLSearchParams({
-              limit: "10",
+              limit: "24",
             }),
-          options
+          options,
         ),
         fetch(
           "https://api.poiskkino.dev/v1.5/list/popular-series?" +
             new URLSearchParams({
-              limit: "10",
+              limit: "24",
             }),
-          options
+          options,
         ),
       ]);
 
@@ -323,7 +339,7 @@ export const searchCollections = async (setData, setIsLoading) => {
           continue;
         }
         throw new Error(
-          `API request failed with status ${fetchResponse1.status}/${fetchResponse2.status}`
+          `API request failed with status ${fetchResponse1.status}/${fetchResponse2.status}`,
         );
       }
 

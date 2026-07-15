@@ -18,15 +18,8 @@ export default memo(function FilmPage() {
     persons.find((person) => person.enProfession === "actor") &&
       setIsActor(true);
   };
-  //Переписать тут без хука, например просто отфильтровать и отобразить новый массив
 
   useEffect(() => {
-    // if (location.state?.data) {
-    //   setFilm(location.state.data);
-    //   setIsLoading(false);
-    //   return;
-    // }
-
     searchById(id, setFilm, setIsLoading);
   }, [location.state]);
 
@@ -43,7 +36,6 @@ export default memo(function FilmPage() {
         film.logo.previewUrl ? (
           <>
             <div className="movie__backdrop">
-              {/* tmdb-proxy-multi-cinema.vercel.app/proxy${film.backdrop.url.slice(26)} */}
               <img
                 className="movie__backdrop--img"
                 src={film.backdrop.url}
@@ -110,7 +102,7 @@ export default memo(function FilmPage() {
                 Продолжительность: {film.movieLength} мин.
               </div>
             )}
-            {film.rating.imdb !== 0 && (
+            {film.rating && film.rating.imdb !== 0 && (
               <div className="movie__rating">
                 Рейтинг: {film.rating.imdb}/10
               </div>

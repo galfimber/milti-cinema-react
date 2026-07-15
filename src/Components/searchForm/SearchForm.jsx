@@ -3,7 +3,7 @@ import { useAppContext } from "../../context/AppContext";
 import { searchByName, searchByGenre } from "../api/getData";
 import { useNavigate } from "react-router-dom";
 
-export default function SearchForm({}) {
+export default function SearchForm() {
   const { setFilmName, setData, setPages, setIsLoading, setFetchMethod, setGenre } =
     useAppContext();
   const [localFilmName, setLocalFilmName] = useState("");

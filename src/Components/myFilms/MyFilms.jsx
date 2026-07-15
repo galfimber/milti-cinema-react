@@ -1,6 +1,5 @@
 import { useAppContext } from "../../context/AppContext";
 import Film from "../film/Film";
-import Auth from "../profile/Auth";
 import Profile from "./../profile/Profile";
 
 export default function MyFilms() {
@@ -11,7 +10,6 @@ export default function MyFilms() {
   return (
     <section className="my-films">
       <div className="container">
-        {/* <AuthDetails /> */}
         {user ? (
           <>
             <h2 className="my-films__title">Вы смотрите</h2>
@@ -26,10 +24,7 @@ export default function MyFilms() {
             </div>
           </>
         ) : (
-          // <div className="profile__unauth">
-          //   <div>Вы не авторизованы</div>
-          //   <Auth user={user} />
-          // </div>
+
           <Profile/>
         )}
       </div>

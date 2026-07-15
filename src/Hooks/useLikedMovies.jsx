@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getLikedMovies, saveLikedMovies } from "../firebase";
-// import authUser from "./../Components/auth/AuthDetails";
 
 export const useLikedMovies = (user) => {
   const [likedMovies, setLikedMovies] = useState([]);

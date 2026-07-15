@@ -1,8 +1,6 @@
 import { useAppContext } from "../../context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faMagnifyingGlass,
-  faArrowRight,
   faBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";

@@ -14,9 +14,21 @@ export default function KinoboxPlayer({ kpId }) {
 
   useEffect(() => {
     getPlayer();
-  }, [film]);
+    setLink("");
+  }, []);
 
   let isPlayer = false;
+  let premierDate = film.premiere? new Date(film.premiere[Object.keys(film.premiere)[0]]) : null;
+  let yearPremier = premierDate?.getFullYear();
+  let monthPremier = premierDate?.getMonth() + 1;
+  let datePremier = premierDate?.getDate();
+
+  if (datePremier < 10) {
+    datePremier = "0" + datePremier;
+  }
+  if (monthPremier < 10) {
+    monthPremier = "0" + monthPremier;
+  }
 
   const getPlayer = async () => {
     const options = {
@@ -84,15 +96,16 @@ export default function KinoboxPlayer({ kpId }) {
           title="Inline Frame Map"
           width="100%"
           height="600px"
-          frameborder="1"
-          allowfullscreen="true"
+          frameBorder="1"
           src={link}
         ></iframe>
       ) : (
         <div className="premier">
           {isPlayer
             ? "Попробуйте другой плеер"
-            : "К сожалению фильм пока недоступен"}
+            : (premierDate && (premierDate > new Date()))
+              ? `Премьера фильма ${datePremier}.${monthPremier}.${yearPremier}`
+              : "К сожалению фильм пока недоступен"}
         </div>
       )}
     </div>
