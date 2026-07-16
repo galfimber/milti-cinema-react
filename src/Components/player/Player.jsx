@@ -97,6 +97,7 @@ export default function KinoboxPlayer({ kpId }) {
           width="100%"
           height="600px"
           frameBorder="1"
+          allowFullScreen="true"
           src={link}
         ></iframe>
       ) : (
